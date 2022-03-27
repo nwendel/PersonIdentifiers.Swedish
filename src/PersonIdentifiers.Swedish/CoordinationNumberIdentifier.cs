@@ -32,9 +32,9 @@ public sealed class CoordinationNumberIdentifier : PersonIdentifier
     }
 
     public static new CoordinationNumberIdentifier Parse(string value) =>
-            TryParse(value, out var identifier)
-                ? identifier
-                : throw new CoordinationNumberIdentifierFormatException();
+        TryParse(value, out var identifier)
+            ? identifier
+            : throw new CoordinationNumberIdentifierFormatException();
 
     public static bool TryParse(string value, [NotNullWhen(true)] out CoordinationNumberIdentifier? identifier)
     {

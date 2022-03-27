@@ -1,6 +1,5 @@
-﻿namespace PersonIdentifiers.Swedish
+﻿namespace PersonIdentifiers.Swedish;
+
+public class NationalReserveNumberIdentifierFormatException : PersonIdentifierFormatException
 {
-    public class NationalReserveNumberIdentifierFormatException : PersonIdentifierFormatException
-    {
-    }
 }

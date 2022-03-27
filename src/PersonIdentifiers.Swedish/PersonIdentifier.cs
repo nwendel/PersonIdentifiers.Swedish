@@ -57,7 +57,6 @@ public abstract class PersonIdentifier
 
     public override string ToString()
     {
-        // TODO: This is wrong
         return _value;
     }
 }

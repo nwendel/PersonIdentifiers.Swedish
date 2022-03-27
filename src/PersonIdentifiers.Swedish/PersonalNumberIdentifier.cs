@@ -32,9 +32,9 @@ public sealed class PersonalNumberIdentifier : PersonIdentifier
     }
 
     public static new PersonalNumberIdentifier Parse(string value) =>
-            TryParse(value, out var identifier)
-                ? identifier
-                : throw new PersonalNumberIdentifierFormatException();
+        TryParse(value, out var identifier)
+            ? identifier
+            : throw new PersonalNumberIdentifierFormatException();
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonalNumberIdentifier? identifier)
     {
