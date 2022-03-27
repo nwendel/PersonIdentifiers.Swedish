@@ -4,27 +4,26 @@ using PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.Entities;
 using PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.TestHelpers;
 using Xunit;
 
-namespace PersonIdentifiers.Swedish.EntityFrameworkCore.Tests
+namespace PersonIdentifiers.Swedish.EntityFrameworkCore.Tests;
+
+public class PersonIdentifierTests
 {
-    public class PersonIdentifierTests
+    private const string _pnr = "191212121212";
+    private readonly Guid _databaseName = Guid.NewGuid();
+
+    [Fact]
+    public void CanSaveAndQuery()
     {
-        private const string _pnr = "191212121212";
-        private readonly Guid _databaseName = Guid.NewGuid();
+        var identifier = PersonIdentifier.Parse(_pnr);
+        var entity = new PersonIdentifierEntity(identifier);
 
-        [Fact]
-        public void Asdf()
-        {
-            var identifier = PersonIdentifier.Parse(_pnr);
-            var entity = new PersonIdentifierEntity(identifier);
+        using var dbContext = new PersonIdentifiersDbContext(_databaseName);
+        dbContext.Add(entity);
+        dbContext.SaveChanges();
 
-            using var dbContext = new PersonIdentifiersDbContext(_databaseName);
-            dbContext.Add(entity);
-            dbContext.SaveChanges();
+        using var dbContext2 = new PersonIdentifiersDbContext(_databaseName);
+        var result = dbContext2.PersonIdentifiers.Single();
 
-            using var dbContext2 = new PersonIdentifiersDbContext(_databaseName);
-            var result = dbContext2.PersonIdentifiers.Single();
-
-            Assert.Equal(_pnr, result.Identifier.Value);
-        }
+        Assert.Equal(_pnr, result.Identifier.Value);
     }
 }

@@ -22,6 +22,11 @@ public sealed class NationalReserveNumberIdentifier : PersonIdentifier
 
     public override string Oid => PersonIdentifierOids.NationalReserveNumber;
 
+    public static new NationalReserveNumberIdentifier Parse(string value) =>
+        TryParse(value, out var identifier)
+            ? identifier
+            : throw new NationalReserveNumberIdentifierFormatException();
+
     public static bool TryParse(string value, [NotNullWhen(true)] out NationalReserveNumberIdentifier? identifier)
     {
         GuardAgainst.Null(value);

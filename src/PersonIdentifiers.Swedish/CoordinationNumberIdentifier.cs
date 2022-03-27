@@ -31,6 +31,11 @@ public sealed class CoordinationNumberIdentifier : PersonIdentifier
         private set => base.Gender = value;
     }
 
+    public static new CoordinationNumberIdentifier Parse(string value) =>
+        TryParse(value, out var identifier)
+            ? identifier
+            : throw new CoordinationNumberIdentifierFormatException();
+
     public static bool TryParse(string value, [NotNullWhen(true)] out CoordinationNumberIdentifier? identifier)
     {
         GuardAgainst.Null(value);
