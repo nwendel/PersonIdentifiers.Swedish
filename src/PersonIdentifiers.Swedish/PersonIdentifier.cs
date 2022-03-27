@@ -24,15 +24,10 @@ public abstract class PersonIdentifier
 
     public PersonIdentifierGender? Gender { get; protected set; }
 
-    public static PersonIdentifier Parse(string value)
-    {
-        if (TryParse(value, out var identifier))
-        {
-            return identifier;
-        }
-
-        throw new PersonIdentifierFormatException();
-    }
+    public static PersonIdentifier Parse(string value) =>
+        TryParse(value, out var identifier)
+            ? identifier
+            : throw new PersonIdentifierFormatException();
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {

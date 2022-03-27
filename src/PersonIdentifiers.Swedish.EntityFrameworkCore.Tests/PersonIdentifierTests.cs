@@ -1,4 +1,5 @@
-﻿using PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.Entities;
+﻿using System.Linq;
+using PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.Entities;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.EntityFrameworkCore.Tests
@@ -6,10 +7,12 @@ namespace PersonIdentifiers.Swedish.EntityFrameworkCore.Tests
     public class PersonIdentifierTests
     {
         private PersonIdentifiersDbContext _dbContext;
+        private PersonIdentifiersDbContext _dbContext2;
 
         public PersonIdentifierTests()
         {
             _dbContext = new PersonIdentifiersDbContext();
+            _dbContext2 = new PersonIdentifiersDbContext();
         }
 
         [Fact]
@@ -23,6 +26,8 @@ namespace PersonIdentifiers.Swedish.EntityFrameworkCore.Tests
 
             _dbContext.Add(asdf);
             _dbContext.SaveChanges();
+
+            var qwerty = _dbContext2.PersonIdentifiers.Single();
         }
     }
 }
