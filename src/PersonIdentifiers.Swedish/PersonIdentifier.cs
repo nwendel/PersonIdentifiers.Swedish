@@ -20,9 +20,9 @@ public abstract class PersonIdentifier
 
     public PersonIdentifierParts Parts { get; }
 
-    public virtual LocalDate? DateOfBirth { get; protected set; }
+    public LocalDate? DateOfBirth { get; protected set; }
 
-    public virtual PersonIdentifierGender? Gender { get; protected set; }
+    public PersonIdentifierGender? Gender { get; protected set; }
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {

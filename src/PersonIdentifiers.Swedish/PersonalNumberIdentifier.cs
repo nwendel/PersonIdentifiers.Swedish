@@ -19,20 +19,16 @@ public sealed class PersonalNumberIdentifier : PersonIdentifier
 
     public override string Oid => PersonIdentifierOids.PersonalNumber;
 
-    // TODO: Is this the best design?
-    [NotNull]
-    public override LocalDate? DateOfBirth
+    public new LocalDate DateOfBirth
     {
-        get => base.DateOfBirth!;
-        protected set => base.DateOfBirth = value;
+        get => base.DateOfBirth ?? throw new UnreachableCodeException();
+        private set => base.DateOfBirth = value;
     }
 
-    // TODO: Is this the best design?
-    [NotNull]
-    public override PersonIdentifierGender? Gender
+    public new PersonIdentifierGender Gender
     {
-        get => base.Gender!;
-        protected set => base.Gender = value;
+        get => base.Gender ?? throw new UnreachableCodeException();
+        private set => base.Gender = value;
     }
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonalNumberIdentifier? identifier)
