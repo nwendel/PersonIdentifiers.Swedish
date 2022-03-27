@@ -5,4 +5,5 @@ public enum PersonIdentifierKind
     PersonalNumber,
     CoordinationNumber,
     NationalReserveNumber,
+    LocalReserveNumber,
 }
