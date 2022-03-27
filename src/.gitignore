@@ -1,0 +1,16 @@
+# Visual Studio 2015 cache/options directory
+.vs/
+
+# Build results
+[Dd]ebugPublic/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Test results
+[Tt]est[Rr]esults
+
