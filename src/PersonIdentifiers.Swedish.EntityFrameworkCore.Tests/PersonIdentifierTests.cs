@@ -1,33 +1,30 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.Entities;
+using PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.TestHelpers;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.EntityFrameworkCore.Tests
 {
     public class PersonIdentifierTests
     {
-        private PersonIdentifiersDbContext _dbContext;
-        private PersonIdentifiersDbContext _dbContext2;
-
-        public PersonIdentifierTests()
-        {
-            _dbContext = new PersonIdentifiersDbContext();
-            _dbContext2 = new PersonIdentifiersDbContext();
-        }
+        private const string _pnr = "191212121212";
+        private readonly Guid _databaseName = Guid.NewGuid();
 
         [Fact]
         public void Asdf()
         {
-            _ = PersonIdentifier.TryParse("191212121212", out var identifier);
-            var asdf = new PersonIdentifierEntity
-            {
-                PersonIdentifier = identifier,
-            };
+            var identifier = PersonIdentifier.Parse(_pnr);
+            var entity = new PersonIdentifierEntity(identifier);
 
-            _dbContext.Add(asdf);
-            _dbContext.SaveChanges();
+            using var dbContext = new PersonIdentifiersDbContext(_databaseName);
+            dbContext.Add(entity);
+            dbContext.SaveChanges();
 
-            var qwerty = _dbContext2.PersonIdentifiers.Single();
+            using var dbContext2 = new PersonIdentifiersDbContext(_databaseName);
+            var result = dbContext2.PersonIdentifiers.Single();
+
+            Assert.Equal(_pnr, result.Identifier.Value);
         }
     }
 }

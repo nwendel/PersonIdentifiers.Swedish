@@ -2,7 +2,12 @@
 
 public class PersonIdentifierEntity
 {
+    public PersonIdentifierEntity(PersonIdentifier identifier)
+    {
+        Identifier = identifier;
+    }
+
     public int Id { get; set; }
 
-    public PersonIdentifier? PersonIdentifier { get; set; }
+    public PersonIdentifier Identifier { get; set; }
 }

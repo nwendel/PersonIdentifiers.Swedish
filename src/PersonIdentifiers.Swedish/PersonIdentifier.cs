@@ -24,6 +24,8 @@ public abstract class PersonIdentifier
 
     public PersonIdentifierGender? Gender { get; protected set; }
 
+    public string Value => _value;
+
     public static PersonIdentifier Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
@@ -55,7 +57,6 @@ public abstract class PersonIdentifier
 
     public override string ToString()
     {
-        // TODO: This is wrong
         return _value;
     }
 }
