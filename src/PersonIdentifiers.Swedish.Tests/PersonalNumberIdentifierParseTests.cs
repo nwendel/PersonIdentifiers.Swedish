@@ -8,12 +8,13 @@ namespace PersonIdentifiers.Swedish.Tests;
 public class PersonalNumberIdentifierParseTests
 {
     [Theory]
-    [ClassData(typeof(PersonIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters", Justification = "Common test data for multiple tests")]
     public void CanTryParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
         var result = PersonalNumberIdentifier.TryParse(value, out var _);
-        Assert.Equal(kind == PersonIdentifierKind.PersonalNumber, result);
+
+        Assert.True(result);
     }
 
     [Fact]
