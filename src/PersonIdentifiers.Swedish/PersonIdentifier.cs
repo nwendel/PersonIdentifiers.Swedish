@@ -1,14 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NodaTime;
-using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-public abstract class PersonIdentifier
+public abstract class PersonIdentifier : IPersonIdentifierPartsAware<IPersonIdentifierParts>
 {
     private readonly string _value;
 
-    protected PersonIdentifier(string value, PersonIdentifierParts parts)
+    protected PersonIdentifier(string value, IPersonIdentifierParts parts)
     {
         _value = value;
         Parts = parts;
@@ -18,7 +17,7 @@ public abstract class PersonIdentifier
 
     public abstract string Oid { get; }
 
-    public PersonIdentifierParts Parts { get; }
+    public virtual IPersonIdentifierParts Parts { get; }
 
     public LocalDate? DateOfBirth { get; protected set; }
 
