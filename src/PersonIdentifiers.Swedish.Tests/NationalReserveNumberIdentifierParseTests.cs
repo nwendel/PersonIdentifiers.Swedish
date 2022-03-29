@@ -11,12 +11,17 @@ public class NationalReserveNumberIdentifierParseTests
     [ClassData(typeof(NationalReserveNumberIdentifiersTheoryData))]
     public void CanTryParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
-        var result = NationalReserveNumberIdentifier.TryParse(value, out var identifier);
-
-        Assert.True(result);
-        Assert.Equal(kind, identifier!.Kind);
-        Assert.Equal(dateOfBirth, identifier!.DateOfBirth);
-        Assert.Equal(gender, identifier!.Gender);
+        if (NationalReserveNumberIdentifier.TryParse(value, out var identifier))
+        {
+            Assert.Equal(value, identifier.Value);
+            Assert.Equal(kind, identifier.Kind);
+            Assert.Equal(dateOfBirth, identifier.DateOfBirth);
+            Assert.Equal(gender, identifier.Gender);
+        }
+        else
+        {
+            Assert.Fail($"Failed to parse {identifier}");
+        }
     }
 
     [Theory]
@@ -44,8 +49,9 @@ public class NationalReserveNumberIdentifierParseTests
     {
         var identifier = NationalReserveNumberIdentifier.Parse(value);
 
-        Assert.Equal(kind, identifier!.Kind);
-        Assert.Equal(dateOfBirth, identifier!.DateOfBirth);
-        Assert.Equal(gender, identifier!.Gender);
+        Assert.Equal(value, identifier.Value);
+        Assert.Equal(kind, identifier.Kind);
+        Assert.Equal(dateOfBirth, identifier.DateOfBirth);
+        Assert.Equal(gender, identifier.Gender);
     }
 }
