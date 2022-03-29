@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B1795ACE-158E-427C-86AC-D71BE5A91927}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B936A939-1E9F-4DAF-9596-D8346629D275}"
@@ -14,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.Tests", "PersonIdentifiers.Swedish.Tests\PersonIdentifiers.Swedish.Tests.csproj", "{D9BDD970-CEE4-41DE-87A4-F90DBBCC23CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonIdentifiers.Swedish.EntityFrameworkCore", "PersonIdentifiers.Swedish.EntityFrameworkCore\PersonIdentifiers.Swedish.EntityFrameworkCore.csproj", "{1D741FB2-2304-4BEB-9CFD-2AB772F919A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.EntityFrameworkCore", "PersonIdentifiers.Swedish.EntityFrameworkCore\PersonIdentifiers.Swedish.EntityFrameworkCore.csproj", "{1D741FB2-2304-4BEB-9CFD-2AB772F919A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonIdentifiers.Swedish.EntityFrameworkCore.Tests", "PersonIdentifiers.Swedish.EntityFrameworkCore.Tests\PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.csproj", "{F5096C61-F0EE-4DEA-BBBE-0FCF57E0312B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.EntityFrameworkCore.Tests", "PersonIdentifiers.Swedish.EntityFrameworkCore.Tests\PersonIdentifiers.Swedish.EntityFrameworkCore.Tests.csproj", "{F5096C61-F0EE-4DEA-BBBE-0FCF57E0312B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

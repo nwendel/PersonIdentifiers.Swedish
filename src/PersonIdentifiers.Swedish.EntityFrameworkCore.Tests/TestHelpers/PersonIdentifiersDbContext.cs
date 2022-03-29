@@ -15,6 +15,12 @@ public class PersonIdentifiersDbContext : DbContext
 
     public DbSet<PersonIdentifierEntity> PersonIdentifiers => Set<PersonIdentifierEntity>();
 
+    public DbSet<PersonalNumberIdentifierEntity> PersonalNumberIdentifiers => Set<PersonalNumberIdentifierEntity>();
+
+    public DbSet<CoordinationNumberIdentifierEntity> CoordinationNumberIdentifiers => Set<CoordinationNumberIdentifierEntity>();
+
+    public DbSet<NationalReserveNumberIdentifierEntity> NationalReserveNumberIdentifiers => Set<NationalReserveNumberIdentifierEntity>();
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         configurationBuilder.AddPersonIdentifiersConventions();
