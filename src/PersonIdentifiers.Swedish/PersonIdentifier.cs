@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NodaTime;
+using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
@@ -9,6 +10,9 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<IPersonIden
 
     protected PersonIdentifier(string value, IPersonIdentifierParts parts)
     {
+        GuardAgainst.NullOrWhiteSpace(value);
+        GuardAgainst.Null(parts);
+
         _value = value;
         Parts = parts;
     }
