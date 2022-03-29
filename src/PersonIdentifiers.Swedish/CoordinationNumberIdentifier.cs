@@ -1,16 +1,17 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-public sealed class CoordinationNumberIdentifier : PersonIdentifier
+public sealed class CoordinationNumberIdentifier :
+    PersonIdentifier,
+    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
     private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([6-9]){1})(\d{1})(([0-9]){4})$");
 
-    private CoordinationNumberIdentifier(string value, PersonIdentifierParts parts)
+    private CoordinationNumberIdentifier(string value, StandardPersonIdentifierParts parts)
         : base(value, parts)
     {
     }
@@ -18,6 +19,8 @@ public sealed class CoordinationNumberIdentifier : PersonIdentifier
     public override PersonIdentifierKind Kind => PersonIdentifierKind.CoordinationNumber;
 
     public override string Oid => PersonIdentifierOids.CoordinationNumber;
+
+    public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
     public new LocalDate DateOfBirth
     {
@@ -46,18 +49,17 @@ public sealed class CoordinationNumberIdentifier : PersonIdentifier
             return false;
         }
 
-        var parts = new PersonIdentifierParts(value);
-        var year = int.Parse(parts.Year, CultureInfo.CurrentCulture);
-        var month = int.Parse(parts.Month, CultureInfo.CurrentCulture);
-        var day = int.Parse(parts.Day, CultureInfo.CurrentCulture) - 60;
-        if (LocalDateHelper.IsInvalidDate(year, month, day))
+        var parts = new StandardPersonIdentifierParts(value);
+        var day = parts.Day - 60;
+
+        if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, day))
         {
             return false;
         }
 
         identifier = new CoordinationNumberIdentifier(value, parts)
         {
-            DateOfBirth = new LocalDate(year, month, day),
+            DateOfBirth = new LocalDate(parts.Year, parts.Month, day),
             Gender = GetGender(),
         };
 
@@ -65,7 +67,7 @@ public sealed class CoordinationNumberIdentifier : PersonIdentifier
 
         PersonIdentifierGender GetGender()
         {
-            var genderDigit = parts.Gender[0] - '0';
+            var genderDigit = parts.Gender - '0';
             return genderDigit.IsOdd()
                 ? PersonIdentifierGender.Male
                 : PersonIdentifierGender.Female;

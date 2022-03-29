@@ -1,16 +1,17 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-public sealed class PersonalNumberIdentifier : PersonIdentifier
+public sealed class PersonalNumberIdentifier :
+    PersonIdentifier,
+    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
     private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([0-3]){1})(\d{1})(([0-9]){4})$");
 
-    private PersonalNumberIdentifier(string value, PersonIdentifierParts parts)
+    private PersonalNumberIdentifier(string value, StandardPersonIdentifierParts parts)
         : base(value, parts)
     {
     }
@@ -18,6 +19,8 @@ public sealed class PersonalNumberIdentifier : PersonIdentifier
     public override PersonIdentifierKind Kind => PersonIdentifierKind.PersonalNumber;
 
     public override string Oid => PersonIdentifierOids.PersonalNumber;
+
+    public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
     public new LocalDate DateOfBirth
     {
@@ -46,18 +49,15 @@ public sealed class PersonalNumberIdentifier : PersonIdentifier
             return false;
         }
 
-        var parts = new PersonIdentifierParts(value);
-        var year = int.Parse(parts.Year, CultureInfo.CurrentCulture);
-        var month = int.Parse(parts.Month, CultureInfo.CurrentCulture);
-        var day = int.Parse(parts.Day, CultureInfo.CurrentCulture);
-        if (LocalDateHelper.IsInvalidDate(year, month, day))
+        var parts = new StandardPersonIdentifierParts(value);
+        if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, parts.Day))
         {
             return false;
         }
 
         identifier = new PersonalNumberIdentifier(value, parts)
         {
-            DateOfBirth = new LocalDate(year, month, day),
+            DateOfBirth = new LocalDate(parts.Year, parts.Month, parts.Day),
             Gender = GetGender(),
         };
 
@@ -65,7 +65,7 @@ public sealed class PersonalNumberIdentifier : PersonIdentifier
 
         PersonIdentifierGender GetGender()
         {
-            var genderDigit = parts.Gender[0] - '0';
+            var genderDigit = parts.Gender - '0';
             return genderDigit.IsOdd()
                 ? PersonIdentifierGender.Male
                 : PersonIdentifierGender.Female;
