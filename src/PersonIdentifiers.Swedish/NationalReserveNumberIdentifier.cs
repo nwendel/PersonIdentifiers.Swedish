@@ -40,6 +40,7 @@ public sealed class NationalReserveNumberIdentifier :
             return false;
         }
 
+        // TODO: Also check blacklisted texts in value: https://www.transportstyrelsen.se/sv/vagtrafik/Fordon/Om-registreringsskylt/Byte-av-registreringsnummer/Sparrade-bokstavskombinationer/
         var parts = new StandardPersonIdentifierParts(value);
         var century = parts.Century;
         if (!IsValidCentury())
