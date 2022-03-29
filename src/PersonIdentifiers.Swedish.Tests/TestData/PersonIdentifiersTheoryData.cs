@@ -1,7 +1,7 @@
 ﻿using NodaTime;
 using Xunit;
 
-namespace PersonIdentifiers.Swedish.Tests;
+namespace PersonIdentifiers.Swedish.Tests.TestData;
 
 public class PersonIdentifiersTheoryData : TheoryData<string, PersonIdentifierKind, LocalDate?, PersonIdentifierGender?>
 {
