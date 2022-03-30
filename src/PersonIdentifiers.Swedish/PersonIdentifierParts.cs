@@ -1,5 +1,10 @@
-﻿namespace PersonIdentifiers.Swedish;
+﻿using System.Collections;
 
-public class PersonIdentifierParts
+namespace PersonIdentifiers.Swedish;
+
+public abstract class PersonIdentifierParts : IEnumerable<(string Name, object Value)>
 {
+    public abstract IEnumerator<(string Name, object Value)> GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }
