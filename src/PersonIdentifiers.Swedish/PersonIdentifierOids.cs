@@ -1,4 +1,5 @@
-﻿using PersonIdentifiers.Swedish.Local;
+﻿using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Local;
 
 namespace PersonIdentifiers.Swedish;
 
@@ -26,13 +27,19 @@ public static class PersonIdentifierOids
 
     public const string LocalReserveNumberVastraGotalandsregionen = "1.2.752.113.11.0.2.1.1.1";
 
-    public static string GetOid(PersonIdentifierKind kind) => kind switch
+    public static string GetOid(PersonIdentifierKind kind)
     {
-        PersonIdentifierKind.PersonalNumber => PersonalNumber,
-        PersonIdentifierKind.CoordinationNumber => CoordinationNumber,
-        PersonIdentifierKind.NationalReserveNumber => NationalReserveNumber,
-        PersonIdentifierKind.LocalReserveNumber => throw new ArgumentException("Cannot get Oid for LocalReserveNumber"),
-    };
+        GuardAgainst.Undefined(kind);
+
+        var oid = kind switch
+        {
+            PersonIdentifierKind.PersonalNumber => PersonalNumber,
+            PersonIdentifierKind.CoordinationNumber => CoordinationNumber,
+            PersonIdentifierKind.NationalReserveNumber => NationalReserveNumber,
+            PersonIdentifierKind.LocalReserveNumber => throw new ArgumentException("Cannot get Oid for LocalReserveNumber"),
+        };
+        return oid;
+    }
 
     // TODO: Should constants and this method be in this class?
     public static string GetLocalReserveNumberOid(LocalReserveNumberPrincipal principal) => principal switch
