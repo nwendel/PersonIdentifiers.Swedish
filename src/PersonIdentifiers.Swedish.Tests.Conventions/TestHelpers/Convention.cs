@@ -6,11 +6,10 @@ using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Internal;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
 
-public abstract class Convention
+public abstract class Convention : IInitializeConvention
 {
     private ConventionContext? _context;
 
-    // TODO: Should setter be public? Maybe only settable via en interface?
     public ConventionContext Context
     {
         get
@@ -22,7 +21,14 @@ public abstract class Convention
 
             return _context;
         }
-        set => _context = value;
+    }
+
+    [SuppressMessage("Design", "CA1033:Interface methods should be callable by child types", Justification = "Method should not be visible on class")]
+    void IInitializeConvention.Initialize(ConventionContext context)
+    {
+        GuardAgainst.Null(context);
+
+        _context = context;
     }
 
     [DoesNotReturn]

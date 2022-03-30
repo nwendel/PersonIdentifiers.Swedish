@@ -22,6 +22,12 @@ public class PersonIdentifiersParseConventionTests
     }
 
     [Fact]
+    public void HasStaticTryParseMethod()
+    {
+        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticParseMethod>(_personIdentifierTypes);
+    }
+
+    [Fact]
     public void IsSealedOrAbstract()
     {
         ConventionAssert.TypesFollow<PersonIdentifierTypesMustBeAbstractOrSealed>(_personIdentifierTypes);
