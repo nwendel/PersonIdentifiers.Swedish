@@ -1,7 +1,7 @@
 ﻿namespace PersonIdentifiers.Swedish;
 
 public interface IPersonIdentifierPartsAware<T>
-    where T : IPersonIdentifierParts
+    where T : PersonIdentifierParts
 {
     T Parts { get; }
 }
