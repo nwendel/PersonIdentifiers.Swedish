@@ -29,4 +29,14 @@ public static class GuardAgainst
             throw new ArgumentNullException(argumentName);
         }
     }
+
+    public static void Undefined<T>(T value, [CallerArgumentExpression("value")] string? argumentName = null)
+        where T : struct, Enum
+    {
+        var isDefined = Enum.IsDefined(value);
+        if (!isDefined)
+        {
+            throw new ArgumentOutOfRangeException(argumentName, $"Argument {argumentName} has value {value} is not valid for type {typeof(T).Name}");
+        }
+    }
 }
