@@ -7,6 +7,7 @@ public class InvalidPersonalNumberIdentifiersTheoryData : TheoryData<string, Per
 {
     public InvalidPersonalNumberIdentifiersTheoryData()
     {
-        Add("191202311211", PersonIdentifierKind.PersonalNumber, null, null);
+        Add("191202311211", PersonIdentifierKind.PersonalNumber, null, null); // Invalid month/day combination
+        Add("191212121210", PersonIdentifierKind.PersonalNumber, null, null); // Invalid checkdigit
     }
 }

@@ -22,11 +22,21 @@ public static class GuardAgainst
         }
     }
 
-    public static void NullOrWhiteSpace([NotNull] string value, [CallerArgumentExpression("value")] string? argumentName = null)
+    public static void NullOrWhiteSpace([NotNull] string? value, [CallerArgumentExpression("value")] string? argumentName = null)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
             throw new ArgumentNullException(argumentName);
+        }
+    }
+
+    public static void Undefined<T>(T value, [CallerArgumentExpression("value")] string? argumentName = null)
+        where T : struct, Enum
+    {
+        var isDefined = Enum.IsDefined(value);
+        if (!isDefined)
+        {
+            throw new ArgumentOutOfRangeException(argumentName, $"Value {value} is not valid for type {typeof(T).Name}");
         }
     }
 }
