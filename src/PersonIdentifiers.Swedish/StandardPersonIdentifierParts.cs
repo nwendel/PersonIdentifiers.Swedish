@@ -3,7 +3,7 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-public class StandardPersonIdentifierParts : IPersonIdentifierParts
+public class StandardPersonIdentifierParts : PersonIdentifierParts
 {
     public StandardPersonIdentifierParts(string value)
     {
