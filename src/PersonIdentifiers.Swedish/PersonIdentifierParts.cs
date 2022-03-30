@@ -1,5 +1,5 @@
 ﻿namespace PersonIdentifiers.Swedish;
 
-public class IPersonIdentifierParts
+public class PersonIdentifierParts
 {
 }
