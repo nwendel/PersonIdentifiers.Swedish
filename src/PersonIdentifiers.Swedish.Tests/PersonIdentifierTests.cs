@@ -1,20 +1,16 @@
-﻿using NodaTime;
-using Xunit;
+﻿using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests
 {
     public class PersonIdentifierTests
     {
-        [Theory]
-        [ClassData(typeof(PersonIdentifiersTheoryData))]
-        public void CanTryParse(string identity, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
+        [Fact]
+        public void CanToString()
         {
-            var result = PersonIdentifier.TryParse(identity, out var identifier);
+            var pnr = "191212121212";
+            var identifier = PersonIdentifier.Parse(pnr);
 
-            Assert.True(result);
-            Assert.Equal(kind, identifier!.Kind);
-            Assert.Equal(dateOfBirth, identifier!.DateOfBirth);
-            Assert.Equal(gender, identifier!.Gender);
+            Assert.Equal(pnr, identifier.ToString());
         }
     }
 }

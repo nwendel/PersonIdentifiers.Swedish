@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
@@ -7,13 +6,15 @@ using PersonIdentifiers.Swedish.Internal;
 namespace PersonIdentifiers.Swedish;
 
 // https://confluence.cgiostersund.se/display/PU/Nationellt+Reservid
-public sealed class NationalReserveNumberIdentifier : PersonIdentifier
+public sealed class NationalReserveNumberIdentifier :
+    PersonIdentifier,
+    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
     private static readonly Regex _pattern = new(@"^([0-9]{8})((?![IOQVW])[A-Z]{2}[0-9]{2}|(?![IOQVW])[A-Z]{3}[0-9]{1})$");
 
     private NationalReserveNumberIdentifier(
         string value,
-        PersonIdentifierParts parts)
+        StandardPersonIdentifierParts parts)
         : base(value, parts)
     {
     }
@@ -21,6 +22,8 @@ public sealed class NationalReserveNumberIdentifier : PersonIdentifier
     public override PersonIdentifierKind Kind => PersonIdentifierKind.NationalReserveNumber;
 
     public override string Oid => PersonIdentifierOids.NationalReserveNumber;
+
+    public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
     public static new NationalReserveNumberIdentifier Parse(string value) =>
         TryParse(value, out var identifier)
@@ -37,9 +40,9 @@ public sealed class NationalReserveNumberIdentifier : PersonIdentifier
             return false;
         }
 
-        // TODO: Check Luhn
-        var parts = new PersonIdentifierParts(value);
-        var century = int.Parse(parts.Century, CultureInfo.CurrentCulture);
+        // TODO: Also check blacklisted texts in value: https://www.transportstyrelsen.se/sv/vagtrafik/Fordon/Om-registreringsskylt/Byte-av-registreringsnummer/Sparrade-bokstavskombinationer/
+        var parts = new StandardPersonIdentifierParts(value);
+        var century = parts.Century;
         if (!IsValidCentury())
         {
             return false;
@@ -66,9 +69,9 @@ public sealed class NationalReserveNumberIdentifier : PersonIdentifier
         {
             dateOfBirth = default;
 
-            var year = int.Parse(parts.Year, CultureInfo.CurrentCulture);
-            var month = int.Parse(parts.Month, CultureInfo.CurrentCulture);
-            var day = int.Parse(parts.Day, CultureInfo.CurrentCulture);
+            var year = parts.Year;
+            var month = parts.Month;
+            var day = parts.Day;
 
             if (century == 0)
             {
@@ -97,7 +100,7 @@ public sealed class NationalReserveNumberIdentifier : PersonIdentifier
 
         PersonIdentifierGender? GetGender()
         {
-            var gender = parts.Gender[0];
+            var gender = parts.Gender;
             if (char.IsLetter(gender))
             {
                 return null;
