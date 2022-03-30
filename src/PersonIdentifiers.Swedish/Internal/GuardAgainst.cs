@@ -22,7 +22,7 @@ public static class GuardAgainst
         }
     }
 
-    public static void NullOrWhiteSpace([NotNull] string value, [CallerArgumentExpression("value")] string? argumentName = null)
+    public static void NullOrWhiteSpace([NotNull] string? value, [CallerArgumentExpression("value")] string? argumentName = null)
     {
         if (string.IsNullOrWhiteSpace(value))
         {
@@ -36,7 +36,7 @@ public static class GuardAgainst
         var isDefined = Enum.IsDefined(value);
         if (!isDefined)
         {
-            throw new ArgumentOutOfRangeException(argumentName, $"Argument {argumentName} has value {value} is not valid for type {typeof(T).Name}");
+            throw new ArgumentOutOfRangeException(argumentName, $"Value {value} is not valid for type {typeof(T).Name}");
         }
     }
 }
