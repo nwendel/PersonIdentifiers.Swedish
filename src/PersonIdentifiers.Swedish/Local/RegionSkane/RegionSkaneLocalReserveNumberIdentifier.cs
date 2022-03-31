@@ -67,15 +67,10 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
         bool TryGetDateOfBirthShort(out LocalDate? dateOfBirth)
         {
             var year = parts.Year + 2000;
-            if (LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth))
+            if (LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth) &&
+                dateOfBirth < LocalDateHelper.Today())
             {
-                var now = SystemClock.Instance.GetCurrentInstant();
-                var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
-                var today = now.InZone(tz).Date;
-                if (dateOfBirth < today)
-                {
-                    return true;
-                }
+                return true;
             }
 
             year -= 100;

@@ -20,5 +20,13 @@ namespace PersonIdentifiers.Swedish.Internal
                 return false;
             }
         }
+
+        public static LocalDate Today()
+        {
+            var now = SystemClock.Instance.GetCurrentInstant();
+            var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
+            var today = now.InZone(tz).Date;
+            return today;
+        }
     }
 }
