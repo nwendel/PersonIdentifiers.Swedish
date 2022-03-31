@@ -1,6 +1,5 @@
 ﻿using System;
 using NodaTime;
-using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Tests.TestData;
 using Xunit;
 
@@ -66,12 +65,5 @@ public class NationalReserveNumberIdentifierParseTests
     public void ThrowsOnParseInvalid(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
         Assert.Throws<NationalReserveNumberIdentifierFormatException>(() => _ = NationalReserveNumberIdentifier.Parse(value));
-    }
-
-    [Fact]
-    public void Asdf()
-    {
-        var checkDigit = Luhn.Calculate("00790914AA0");
-        Assert.Equal(-1, checkDigit);
     }
 }
