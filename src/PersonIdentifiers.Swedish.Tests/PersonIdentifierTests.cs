@@ -7,9 +7,9 @@ public class PersonIdentifierTests
     [Fact]
     public void CanToString()
     {
-        var pnr = "191212121212";
-        var identifier = PersonIdentifier.Parse(pnr);
+        var personalIdentityNumber = "191212121212";
+        var identifier = PersonIdentifier.Parse(personalIdentityNumber);
 
-        Assert.Equal(pnr, identifier.ToString());
+        Assert.Equal(personalIdentityNumber, identifier.ToString());
     }
 }

@@ -3,9 +3,9 @@ using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.TestData;
 
-public class NationalReserveNumberIdentifiersTheoryData : TheoryData<string, PersonIdentifierKind, LocalDate?, PersonIdentifierGender?>
+public class NationalReserveNumbersTheoryData : TheoryData<string, PersonIdentifierKind, LocalDate?, PersonIdentifierGender?>
 {
-    public NationalReserveNumberIdentifiersTheoryData()
+    public NationalReserveNumbersTheoryData()
     {
         Add("22790814AA01", PersonIdentifierKind.NationalReserveNumber, new LocalDate(1979, 8, 14), PersonIdentifierGender.Female);
         Add("22950606FH12", PersonIdentifierKind.NationalReserveNumber, new LocalDate(1995, 6, 6), PersonIdentifierGender.Male);

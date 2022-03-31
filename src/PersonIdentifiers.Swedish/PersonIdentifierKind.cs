@@ -2,7 +2,7 @@
 
 public enum PersonIdentifierKind
 {
-    PersonalNumber,
+    PersonalIdentityNumber,
     CoordinationNumber,
     NationalReserveNumber,
 }

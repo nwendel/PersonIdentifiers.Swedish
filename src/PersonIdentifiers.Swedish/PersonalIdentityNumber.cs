@@ -5,20 +5,19 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-// TODO: PersonalIdentityNumber?
-//       https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html
-public sealed class PersonalNumberIdentifier :
+// https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html
+public sealed class PersonalIdentityNumber :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
     private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([0-3]){1})(\d{1})(([0-9]){4})$");
 
-    private PersonalNumberIdentifier(string value, StandardPersonIdentifierParts parts)
+    private PersonalIdentityNumber(string value, StandardPersonIdentifierParts parts)
         : base(value, parts)
     {
     }
 
-    public override PersonIdentifierKind Kind => PersonIdentifierKind.PersonalNumber;
+    public override PersonIdentifierKind Kind => PersonIdentifierKind.PersonalIdentityNumber;
 
     public override string Oid => PersonIdentifierOids.PersonalNumber;
 
@@ -36,12 +35,12 @@ public sealed class PersonalNumberIdentifier :
         private set => base.Gender = value;
     }
 
-    public static new PersonalNumberIdentifier Parse(string value) =>
+    public static new PersonalIdentityNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new PersonalNumberIdentifierFormatException();
+            : throw new PersonalIdentityNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out PersonalNumberIdentifier? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out PersonalIdentityNumber? identifier)
     {
         GuardAgainst.Null(value);
 
@@ -57,7 +56,7 @@ public sealed class PersonalNumberIdentifier :
             return false;
         }
 
-        identifier = new PersonalNumberIdentifier(value, parts)
+        identifier = new PersonalIdentityNumber(value, parts)
         {
             DateOfBirth = dateOfBirth.Value,
             Gender = GetGender(),
