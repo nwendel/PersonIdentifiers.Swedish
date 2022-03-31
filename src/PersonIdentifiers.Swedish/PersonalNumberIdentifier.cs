@@ -5,6 +5,8 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
+// TODO: PersonalIdentityNumber?
+//       https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html
 public sealed class PersonalNumberIdentifier :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
@@ -50,14 +52,14 @@ public sealed class PersonalNumberIdentifier :
         }
 
         var parts = new StandardPersonIdentifierParts(value);
-        if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, parts.Day))
+        if (!LocalDateHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
         {
             return false;
         }
 
         identifier = new PersonalNumberIdentifier(value, parts)
         {
-            DateOfBirth = new(parts.Year, parts.Month, parts.Day),
+            DateOfBirth = dateOfBirth.Value,
             Gender = GetGender(),
         };
 
