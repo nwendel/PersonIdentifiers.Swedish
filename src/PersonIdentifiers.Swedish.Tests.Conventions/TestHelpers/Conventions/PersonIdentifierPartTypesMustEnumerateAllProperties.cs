@@ -22,12 +22,12 @@ public class PersonIdentifierPartTypesMustEnumerateAllProperties : TypeConventio
         var length = Math.Max(instance.Count(), properties.Length);
         for (var ix = 0; ix < length; ix++)
         {
-            if (properties.Length < ix - 1)
+            if (properties.Length < ix + 1)
             {
                 Fail(type, $"must not return {instance.ElementAt(ix).Name} since there is no property with same name when enumerating");
             }
 
-            if (instance.Count() < ix - 1)
+            if (instance.Count() < ix + 1)
             {
                 Fail(type, $"must return {properties[ix].Name} when enumerating");
             }
