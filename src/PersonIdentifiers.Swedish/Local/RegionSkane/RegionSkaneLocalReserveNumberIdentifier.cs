@@ -34,13 +34,6 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
         }
 
         var parts = new RegionSkaneLocalReserveNumberIdentifierParts(value);
-        var year = parts.Year;
-        if (parts.Kind == RegionSkaneLocalReserveNumberKind.Short)
-        {
-            // TODO: Add 2000 or 1900 based on some rule
-            year += 1900;
-        }
-
         if (!TryGetDateOfBirth(out var dateOfBirth))
         {
             return false;
@@ -66,9 +59,10 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
 
         bool TryGetDateOfBirthShort(out LocalDate? dateOfBirth)
         {
+            // TODO: If guess the century logic is needed elsewhere then refactor this out from here
             var year = parts.Year + 2000;
             if (LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth) &&
-                dateOfBirth < LocalDateHelper.Today())
+                dateOfBirth <= LocalDateHelper.Today())
             {
                 return true;
             }
