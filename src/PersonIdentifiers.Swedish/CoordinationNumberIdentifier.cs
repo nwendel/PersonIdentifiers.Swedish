@@ -24,13 +24,13 @@ public sealed class CoordinationNumberIdentifier :
 
     public new LocalDate DateOfBirth
     {
-        get => base.DateOfBirth ?? throw new UnreachableCodeException();
+        get => base.DateOfBirth ?? throw new UnreachableCodeException($"{nameof(DateOfBirth)} is null");
         private set => base.DateOfBirth = value;
     }
 
     public new PersonIdentifierGender Gender
     {
-        get => base.Gender ?? throw new UnreachableCodeException();
+        get => base.Gender ?? throw new UnreachableCodeException($"{nameof(Gender)} is null");
         private set => base.Gender = value;
     }
 
