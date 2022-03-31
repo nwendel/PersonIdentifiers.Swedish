@@ -1,32 +1,46 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NodaTime;
 
-namespace PersonIdentifiers.Swedish.Internal
+namespace PersonIdentifiers.Swedish.Internal;
+
+public static class LocalDateHelper
 {
-    public static class LocalDateHelper
+    private static readonly CalendarSystem _calendar = CalendarSystem.Iso;
+    private static readonly int _minYear = _calendar.MinYear;
+    private static readonly int _maxYear = _calendar.MaxYear;
+
+    // TODO: Standard method in NodaTime?
+    //       Or extension method?
+    public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out LocalDate? dateOfBirth)
     {
-        // TODO: Standard method in NodaTime?
-        public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out LocalDate? dateOfBirth)
+        dateOfBirth = default;
+
+        if (year < _minYear || year > _maxYear)
         {
-            // TODO: Rewrite without try/catch
-            try
-            {
-                dateOfBirth = new LocalDate(year, month, day);
-                return true;
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                dateOfBirth = default;
-                return false;
-            }
+            return false;
         }
 
-        public static LocalDate Today()
+        var monthsInYear = _calendar.GetMonthsInYear(year);
+        if (month < 1 || month > monthsInYear)
         {
-            var now = SystemClock.Instance.GetCurrentInstant();
-            var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
-            var today = now.InZone(tz).Date;
-            return today;
+            return false;
         }
+
+        var daysInMonth = CalendarSystem.Iso.GetDaysInMonth(year, month);
+        if (day < 1 || day > daysInMonth)
+        {
+            return false;
+        }
+
+        dateOfBirth = new(year, month, day);
+        return true;
+    }
+
+    public static LocalDate Today()
+    {
+        var now = SystemClock.Instance.GetCurrentInstant();
+        var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
+        var today = now.InZone(tz).Date;
+        return today;
     }
 }
