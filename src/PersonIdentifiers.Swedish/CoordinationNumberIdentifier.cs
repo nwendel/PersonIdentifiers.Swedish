@@ -52,14 +52,14 @@ public sealed class CoordinationNumberIdentifier :
         var parts = new StandardPersonIdentifierParts(value);
         var day = parts.Day - 60;
 
-        if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, day))
+        if (!LocalDateHelper.IsValidDate(parts.Year, parts.Month, day, out var dateOfBirth))
         {
             return false;
         }
 
         identifier = new CoordinationNumberIdentifier(value, parts)
         {
-            DateOfBirth = new LocalDate(parts.Year, parts.Month, day),
+            DateOfBirth = dateOfBirth.Value,
             Gender = GetGender(),
         };
 
