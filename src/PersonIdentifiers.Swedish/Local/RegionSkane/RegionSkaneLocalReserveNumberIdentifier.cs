@@ -58,20 +58,17 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
         };
         return true;
 
-        // TODO: This needs to be simplified!
-        bool TryGetDateOfBirth(out LocalDate? dateOfBirth) => parts.Kind switch
+        bool TryGetDateOfBirth([NotNullWhen(true)] out LocalDate? dateOfBirth) => parts.Kind switch
         {
             RegionSkaneLocalReserveNumberKind.Short => TryGetDateOfBirthShort(out dateOfBirth),
-            RegionSkaneLocalReserveNumberKind.Long => TryGetDateOfBirthLong(out dateOfBirth),
+            RegionSkaneLocalReserveNumberKind.Long => LocalDateHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out dateOfBirth),
         };
 
         bool TryGetDateOfBirthShort(out LocalDate? dateOfBirth)
         {
             var year = parts.Year + 2000;
-            if (!LocalDateHelper.IsInvalidDate(year, parts.Month, parts.Day))
+            if (LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth))
             {
-                dateOfBirth = new(year, parts.Month, parts.Day);
-
                 var now = SystemClock.Instance.GetCurrentInstant();
                 var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
                 var today = now.InZone(tz).Date;
@@ -82,25 +79,12 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
             }
 
             year -= 100;
-            if (LocalDateHelper.IsInvalidDate(year, parts.Month, parts.Day))
+            if (!LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth))
             {
-                dateOfBirth = null;
                 return false;
             }
 
             dateOfBirth = new(year, parts.Month, parts.Day);
-            return true;
-        }
-
-        bool TryGetDateOfBirthLong(out LocalDate? dateOfBirth)
-        {
-            if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, parts.Day))
-            {
-                dateOfBirth = null;
-                return false;
-            }
-
-            dateOfBirth = new(parts.Year, parts.Month, parts.Day);
             return true;
         }
     }
