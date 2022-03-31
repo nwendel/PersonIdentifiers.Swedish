@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
+using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish.Local.RegionSkane;
@@ -40,19 +41,67 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
             year += 1900;
         }
 
-        if (LocalDateHelper.IsInvalidDate(year, parts.Month, parts.Day))
+        if (!TryGetDateOfBirth(out var dateOfBirth))
         {
             return false;
         }
 
-        // TODO: More here
         identifier = new(value, parts)
         {
-            DateOfBirth = new(year, parts.Month, parts.Day),
-            Gender = parts.Gender == '0'
-                ? PersonIdentifierGender.Female
-                : PersonIdentifierGender.Male,
+            DateOfBirth = dateOfBirth,
+            Gender = parts.Gender switch
+            {
+                '0' => PersonIdentifierGender.Female,
+                '1' => PersonIdentifierGender.Male,
+                _ => throw new UnreachableCodeException(),
+            },
         };
         return true;
+
+        // TODO: This needs to be simplified!
+        bool TryGetDateOfBirth(out LocalDate? dateOfBirth) => parts.Kind switch
+        {
+            RegionSkaneLocalReserveNumberKind.Short => TryGetDateOfBirthShort(out dateOfBirth),
+            RegionSkaneLocalReserveNumberKind.Long => TryGetDateOfBirthLong(out dateOfBirth),
+        };
+
+        bool TryGetDateOfBirthShort(out LocalDate? dateOfBirth)
+        {
+            var year = parts.Year + 2000;
+            if (!LocalDateHelper.IsInvalidDate(year, parts.Month, parts.Day))
+            {
+                dateOfBirth = new(year, parts.Month, parts.Day);
+
+                var now = SystemClock.Instance.GetCurrentInstant();
+                var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
+                var today = now.InZone(tz).Date;
+                if (dateOfBirth < today)
+                {
+                    return true;
+                }
+            }
+
+            year -= 100;
+            if (LocalDateHelper.IsInvalidDate(year, parts.Month, parts.Day))
+            {
+                dateOfBirth = null;
+                return false;
+            }
+
+            dateOfBirth = new(year, parts.Month, parts.Day);
+            return true;
+        }
+
+        bool TryGetDateOfBirthLong(out LocalDate? dateOfBirth)
+        {
+            if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, parts.Day))
+            {
+                dateOfBirth = null;
+                return false;
+            }
+
+            dateOfBirth = new(parts.Year, parts.Month, parts.Day);
+            return true;
+        }
     }
 }
