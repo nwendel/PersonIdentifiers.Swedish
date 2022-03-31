@@ -9,8 +9,8 @@ namespace PersonIdentifiers.Swedish.Tests.Internal;
 public class LuhnTests
 {
     [Theory]
-    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
-    [ClassData(typeof(CoordinationNumberIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
+    [ClassData(typeof(CoordinationNumbersTheoryData))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters", Justification = "Common test data for multiple tests")]
     public void CanIsValidTrue(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
@@ -18,8 +18,8 @@ public class LuhnTests
     }
 
     [Theory]
-    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
-    [ClassData(typeof(CoordinationNumberIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
+    [ClassData(typeof(CoordinationNumbersTheoryData))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters", Justification = "Common test data for multiple tests")]
     public void CanCalculate(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {

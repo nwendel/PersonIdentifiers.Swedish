@@ -5,13 +5,13 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-public sealed class CoordinationNumberIdentifier :
+public sealed class CoordinationNumber :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
     private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([6-9]){1})(\d{1})(([0-9]){4})$");
 
-    private CoordinationNumberIdentifier(string value, StandardPersonIdentifierParts parts)
+    private CoordinationNumber(string value, StandardPersonIdentifierParts parts)
         : base(value, parts)
     {
     }
@@ -34,12 +34,12 @@ public sealed class CoordinationNumberIdentifier :
         private set => base.Gender = value;
     }
 
-    public static new CoordinationNumberIdentifier Parse(string value) =>
+    public static new CoordinationNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new CoordinationNumberIdentifierFormatException();
+            : throw new CoordinationNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out CoordinationNumberIdentifier? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out CoordinationNumber? identifier)
     {
         GuardAgainst.Null(value);
 
@@ -57,7 +57,7 @@ public sealed class CoordinationNumberIdentifier :
             return false;
         }
 
-        identifier = new CoordinationNumberIdentifier(value, parts)
+        identifier = new CoordinationNumber(value, parts)
         {
             DateOfBirth = dateOfBirth.Value,
             Gender = GetGender(),

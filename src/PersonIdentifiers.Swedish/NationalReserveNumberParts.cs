@@ -1,8 +1,8 @@
 ﻿namespace PersonIdentifiers.Swedish;
 
-public class NationalReserveNumberIdentifierParts : StandardPersonIdentifierParts
+public class NationalReserveNumberParts : StandardPersonIdentifierParts
 {
-    public NationalReserveNumberIdentifierParts(string value)
+    public NationalReserveNumberParts(string value)
         : base(value)
     {
         SequenceAndGender = value[8..11];
