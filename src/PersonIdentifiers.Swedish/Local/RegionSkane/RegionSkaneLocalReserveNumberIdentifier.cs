@@ -53,7 +53,7 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
             {
                 '0' => PersonIdentifierGender.Female,
                 '1' => PersonIdentifierGender.Male,
-                _ => throw new UnreachableCodeException(),
+                _ => throw new UnreachableCodeException($"Gender part is '{parts.Gender}'"),
             },
         };
         return true;
