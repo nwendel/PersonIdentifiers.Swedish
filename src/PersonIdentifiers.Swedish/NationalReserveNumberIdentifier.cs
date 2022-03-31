@@ -93,12 +93,11 @@ public sealed class NationalReserveNumberIdentifier :
                 year -= 300;
             }
 
-            if (LocalDateHelper.IsInvalidDate(year, month, day))
+            if (!LocalDateHelper.IsValidDate(year, month, day, out dateOfBirth))
             {
                 return false;
             }
 
-            dateOfBirth = new LocalDate(year, month, day);
             return true;
         }
 

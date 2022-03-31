@@ -52,14 +52,14 @@ public sealed class PersonalNumberIdentifier :
         }
 
         var parts = new StandardPersonIdentifierParts(value);
-        if (LocalDateHelper.IsInvalidDate(parts.Year, parts.Month, parts.Day))
+        if (!LocalDateHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
         {
             return false;
         }
 
         identifier = new PersonalNumberIdentifier(value, parts)
         {
-            DateOfBirth = new LocalDate(parts.Year, parts.Month, parts.Day),
+            DateOfBirth = dateOfBirth.Value,
             Gender = GetGender(),
         };
 
