@@ -8,6 +8,5 @@ public class NationalReserveNumberIdentifierParts : StandardPersonIdentifierPart
         SequenceAndGender = value[8..11];
     }
 
-    // TODO: This should fail the convention unit tests
     public string SequenceAndGender { get; }
 }
