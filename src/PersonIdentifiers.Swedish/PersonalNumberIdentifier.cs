@@ -57,7 +57,7 @@ public sealed class PersonalNumberIdentifier :
 
         identifier = new PersonalNumberIdentifier(value, parts)
         {
-            DateOfBirth = new LocalDate(parts.Year, parts.Month, parts.Day),
+            DateOfBirth = new(parts.Year, parts.Month, parts.Day),
             Gender = GetGender(),
         };
 
