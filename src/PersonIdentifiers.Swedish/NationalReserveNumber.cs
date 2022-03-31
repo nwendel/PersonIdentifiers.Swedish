@@ -6,13 +6,13 @@ using PersonIdentifiers.Swedish.Internal;
 namespace PersonIdentifiers.Swedish;
 
 // https://confluence.cgiostersund.se/display/PU/Nationellt+Reservid
-public sealed class NationalReserveNumberIdentifier :
+public sealed class NationalReserveNumber :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
     private static readonly Regex _pattern = new(@"^([0-9]{8})((?![IOQVW])[A-Z]{2}[0-9]{2}|(?![IOQVW])[A-Z]{3}[0-9]{1})$");
 
-    private NationalReserveNumberIdentifier(
+    private NationalReserveNumber(
         string value,
         StandardPersonIdentifierParts parts)
         : base(value, parts)
@@ -25,12 +25,12 @@ public sealed class NationalReserveNumberIdentifier :
 
     public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
-    public static new NationalReserveNumberIdentifier Parse(string value) =>
+    public static new NationalReserveNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new NationalReserveNumberIdentifierFormatException();
+            : throw new NationalReserveNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out NationalReserveNumberIdentifier? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out NationalReserveNumber? identifier)
     {
         GuardAgainst.Null(value);
 
@@ -40,7 +40,7 @@ public sealed class NationalReserveNumberIdentifier :
             return false;
         }
 
-        var parts = new NationalReserveNumberIdentifierParts(value);
+        var parts = new NationalReserveNumberParts(value);
         if (Blacklists.Transportstyrelsen.Contains(parts.SequenceAndGender))
         {
             return false;
@@ -57,7 +57,7 @@ public sealed class NationalReserveNumberIdentifier :
             return false;
         }
 
-        identifier = new NationalReserveNumberIdentifier(value, parts)
+        identifier = new NationalReserveNumber(value, parts)
         {
             DateOfBirth = dateOfBirth,
             Gender = GetGender(),

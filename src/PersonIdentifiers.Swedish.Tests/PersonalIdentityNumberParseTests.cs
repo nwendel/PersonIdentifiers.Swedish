@@ -5,13 +5,13 @@ using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests;
 
-public class NationalReserveNumberIdentifierParseTests
+public class PersonalIdentityNumberParseTests
 {
     [Theory]
-    [ClassData(typeof(NationalReserveNumberIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
     public void CanTryParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
-        if (NationalReserveNumberIdentifier.TryParse(value, out var identifier))
+        if (PersonalIdentityNumber.TryParse(value, out var identifier))
         {
             Assert.Equal(value, identifier.Value);
             Assert.Equal(kind, identifier.Kind);
@@ -25,14 +25,14 @@ public class NationalReserveNumberIdentifierParseTests
     }
 
     [Theory]
-    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
-    [ClassData(typeof(CoordinationNumberIdentifiersTheoryData))]
-    [ClassData(typeof(InvalidNationalReserveNumberIdentifiersTheoryData))]
+    [ClassData(typeof(CoordinationNumbersTheoryData))]
+    [ClassData(typeof(NationalReserveNumbersTheoryData))]
+    [ClassData(typeof(InvalidPersonalIdentityNumbersTheoryData))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters", Justification = "Common test data for multiple tests")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Common test data for multiple tests")]
     public void CanTryParseInvalid(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
-        var result = NationalReserveNumberIdentifier.TryParse(value, out var _);
+        var result = PersonalIdentityNumber.TryParse(value, out var _);
 
         Assert.False(result);
     }
@@ -40,15 +40,15 @@ public class NationalReserveNumberIdentifierParseTests
     [Fact]
     public void ThrowsOnTryParseNullIdentity()
     {
-        var ex = Assert.Throws<ArgumentNullException>(() => _ = NationalReserveNumberIdentifier.TryParse(null!, out var _));
+        var ex = Assert.Throws<ArgumentNullException>(() => _ = PersonalIdentityNumber.TryParse(null!, out var _));
         Assert.Equal("value", ex.ParamName);
     }
 
     [Theory]
-    [ClassData(typeof(NationalReserveNumberIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
     public void CanParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
-        var identifier = NationalReserveNumberIdentifier.Parse(value);
+        var identifier = PersonalIdentityNumber.Parse(value);
 
         Assert.Equal(value, identifier.Value);
         Assert.Equal(kind, identifier.Kind);
@@ -57,13 +57,13 @@ public class NationalReserveNumberIdentifierParseTests
     }
 
     [Theory]
-    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
-    [ClassData(typeof(CoordinationNumberIdentifiersTheoryData))]
-    [ClassData(typeof(InvalidNationalReserveNumberIdentifiersTheoryData))]
+    [ClassData(typeof(CoordinationNumbersTheoryData))]
+    [ClassData(typeof(NationalReserveNumbersTheoryData))]
+    [ClassData(typeof(InvalidPersonalIdentityNumbersTheoryData))]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "xUnit1026:Theory methods should use all of their parameters", Justification = "Common test data for multiple tests")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Common test data for multiple tests")]
     public void ThrowsOnParseInvalid(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
-        Assert.Throws<NationalReserveNumberIdentifierFormatException>(() => _ = NationalReserveNumberIdentifier.Parse(value));
+        Assert.Throws<PersonalIdentityNumberFormatException>(() => _ = PersonalIdentityNumber.Parse(value));
     }
 }

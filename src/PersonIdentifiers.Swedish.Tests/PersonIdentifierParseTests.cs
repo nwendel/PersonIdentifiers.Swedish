@@ -8,9 +8,9 @@ namespace PersonIdentifiers.Swedish.Tests;
 public class PersonIdentifierParseTests
 {
     [Theory]
-    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
-    [ClassData(typeof(CoordinationNumberIdentifiersTheoryData))]
-    [ClassData(typeof(NationalReserveNumberIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
+    [ClassData(typeof(CoordinationNumbersTheoryData))]
+    [ClassData(typeof(NationalReserveNumbersTheoryData))]
     public void CanTryParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
         if (PersonIdentifier.TryParse(value, out var identifier))
@@ -34,9 +34,9 @@ public class PersonIdentifierParseTests
     }
 
     [Theory]
-    [ClassData(typeof(PersonalNumberIdentifiersTheoryData))]
-    [ClassData(typeof(CoordinationNumberIdentifiersTheoryData))]
-    [ClassData(typeof(NationalReserveNumberIdentifiersTheoryData))]
+    [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
+    [ClassData(typeof(CoordinationNumbersTheoryData))]
+    [ClassData(typeof(NationalReserveNumbersTheoryData))]
     public void CanParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
     {
         var identifier = PersonIdentifier.Parse(value);
