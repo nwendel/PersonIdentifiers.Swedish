@@ -42,15 +42,21 @@ public static class PersonIdentifierOids
     }
 
     // TODO: Should constants and this method be in this class?
-    public static string GetLocalReserveNumberOid(LocalReserveNumberPrincipal principal) => principal switch
+    public static string GetLocalReserveNumberOid(LocalReserveNumberPrincipal principal)
     {
-        LocalReserveNumberPrincipal.IneraCarelink => LocalReserveNumberIneraCarelink,
-        LocalReserveNumberPrincipal.LandstingetVarmland => LocalReserveNumberLandstingetVarmland,
-        LocalReserveNumberPrincipal.RegionBlekinge => LocalReserveNumberRegionBlekinge,
-        LocalReserveNumberPrincipal.RegionOrebroLan => LocalReserveNumberRegionOrebroLan,
-        LocalReserveNumberPrincipal.RegionSkane => LocalReserveNumberRegionSkane,
-        LocalReserveNumberPrincipal.RegionStockholm => LocalReserveNumberRegionStockholm,
-        LocalReserveNumberPrincipal.RegionVasternorrland => LocalReserveNumberRegionVasternorrland,
-        LocalReserveNumberPrincipal.VastraGotalandsregionen => LocalReserveNumberVastraGotalandsregionen,
-    };
+        GuardAgainst.Undefined(principal);
+
+        var oid = principal switch
+        {
+            LocalReserveNumberPrincipal.IneraCarelink => LocalReserveNumberIneraCarelink,
+            LocalReserveNumberPrincipal.LandstingetVarmland => LocalReserveNumberLandstingetVarmland,
+            LocalReserveNumberPrincipal.RegionBlekinge => LocalReserveNumberRegionBlekinge,
+            LocalReserveNumberPrincipal.RegionOrebroLan => LocalReserveNumberRegionOrebroLan,
+            LocalReserveNumberPrincipal.RegionSkane => LocalReserveNumberRegionSkane,
+            LocalReserveNumberPrincipal.RegionStockholm => LocalReserveNumberRegionStockholm,
+            LocalReserveNumberPrincipal.RegionVasternorrland => LocalReserveNumberRegionVasternorrland,
+            LocalReserveNumberPrincipal.VastraGotalandsregionen => LocalReserveNumberVastraGotalandsregionen,
+        };
+        return oid;
+    }
 }
