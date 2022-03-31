@@ -19,6 +19,7 @@ public class PersonIdentifierPartTypesMustEnumerateAllProperties : TypeConventio
 
         var properties = type.GetProperties();
 
+        // TODO: Zip limits to the shorter list
         var elements = instance
             .Zip(properties, (part, property) => (Part: part, Property: property))
             .ToList();
