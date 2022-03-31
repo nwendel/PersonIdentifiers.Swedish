@@ -19,24 +19,24 @@ public class PersonIdentifierPartTypesMustEnumerateAllProperties : TypeConventio
 
         var properties = type.GetProperties();
 
-        // TODO: Zip limits to the shorter list
-        var elements = instance
-            .Zip(properties, (part, property) => (Part: part, Property: property))
-            .ToList();
-        foreach (var element in elements)
+        var length = Math.Max(instance.Count(), properties.Length);
+        for (var ix = 0; ix < length; ix++)
         {
-            var elementName = element.Property.Name;
-            if (elementName != element.Part.Name)
+            if (properties.Length < ix - 1)
             {
-                var partNames = elements
-                    .Select(x => x.Part.Name)
-                    .ToList();
-                if (partNames.Contains(elementName))
-                {
-                    Fail(type, $"must return part named {elementName} in correct sequence");
-                }
+                Fail(type, $"must not return {instance.ElementAt(ix).Name} since there is no property with same name when enumerating");
+            }
 
-                Fail(type, $"must return part named {elementName}");
+            if (instance.Count() < ix - 1)
+            {
+                Fail(type, $"must return {properties[ix].Name} when enumerating");
+            }
+
+            var propertyName = properties[ix].Name;
+            var partName = instance.ElementAt(ix).Name;
+            if (propertyName != partName)
+            {
+                Fail(type, $"must return {propertyName} in correct sequence when enumerating");
             }
         }
     }
