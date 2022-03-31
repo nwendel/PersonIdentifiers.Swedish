@@ -35,4 +35,16 @@ public class StandardPersonIdentifierParts : PersonIdentifierParts
     public char Gender { get; }
 
     public char CheckDigit { get; }
+
+    public override IEnumerator<(string Name, object Value)> GetEnumerator()
+    {
+        yield return (Name: nameof(Century), Value: Century);
+        yield return (Name: nameof(Year), Value: Year);
+        yield return (Name: nameof(Month), Value: Month);
+        yield return (Name: nameof(Day), Value: Day);
+        yield return (Name: nameof(Date), Value: Date);
+        yield return (Name: nameof(Sequence), Value: Sequence);
+        yield return (Name: nameof(Gender), Value: Gender);
+        yield return (Name: nameof(CheckDigit), Value: CheckDigit);
+    }
 }
