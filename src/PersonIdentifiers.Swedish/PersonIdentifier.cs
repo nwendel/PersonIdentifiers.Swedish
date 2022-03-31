@@ -23,7 +23,13 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
 
     public virtual PersonIdentifierParts Parts { get; }
 
+    [MemberNotNullWhen(true, nameof(DateOfBirth))]
+    public bool IsDateOfBirthKnown => DateOfBirth.HasValue;
+
     public LocalDate? DateOfBirth { get; protected set; }
+
+    [MemberNotNullWhen(true, nameof(Gender))]
+    public bool IsGenderKnown => Gender.HasValue;
 
     public PersonIdentifierGender? Gender { get; protected set; }
 
