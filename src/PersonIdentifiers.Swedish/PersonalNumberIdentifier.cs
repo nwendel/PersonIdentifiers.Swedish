@@ -5,6 +5,8 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
+// TODO: PersonalIdentityNumber?
+//       https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html
 public sealed class PersonalNumberIdentifier :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
