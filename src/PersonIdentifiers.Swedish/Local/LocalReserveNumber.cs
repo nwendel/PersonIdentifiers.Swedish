@@ -1,8 +1,8 @@
 ﻿namespace PersonIdentifiers.Swedish.Local;
 
-public abstract class LocalReserveNumberIdentifier : PersonIdentifier
+public abstract class LocalReserveNumber : PersonIdentifier
 {
-    protected LocalReserveNumberIdentifier(string value, PersonIdentifierParts parts)
+    protected LocalReserveNumber(string value, PersonIdentifierParts parts)
         : base(value, parts)
     {
     }

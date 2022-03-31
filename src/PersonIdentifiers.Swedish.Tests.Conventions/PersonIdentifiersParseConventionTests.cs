@@ -16,7 +16,7 @@ public class PersonIdentifiersParseConventionTests
         .ToList();
 
     private static readonly IEnumerable<Type> _personIdentifierTypesExceptLocal = _personIdentifierTypes
-        .Where(x => x != typeof(LocalReserveNumberIdentifier))
+        .Where(x => x != typeof(LocalReserveNumber))
         .ToList();
 
     [Fact]

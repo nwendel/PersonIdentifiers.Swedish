@@ -3,12 +3,12 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish.Local.RegionSkane;
 
-public class RegionSkaneLocalReserveNumberIdentifierParts : PersonIdentifierParts
+public class RegionSkaneLocalReserveNumberParts : PersonIdentifierParts
 {
     private const int ShortLength = 10;
     private const int LongLength = 12;
 
-    public RegionSkaneLocalReserveNumberIdentifierParts(string value)
+    public RegionSkaneLocalReserveNumberParts(string value)
     {
         GuardAgainst.Null(value);
 

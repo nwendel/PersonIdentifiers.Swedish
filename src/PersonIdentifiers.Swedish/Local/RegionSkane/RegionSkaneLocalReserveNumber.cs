@@ -5,11 +5,11 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish.Local.RegionSkane;
 
-public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumberIdentifier
+public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
 {
     private static readonly Regex _pattern = new(@"^(\d{6}|\d{8})[D|E|F][A-Z][0|1][A-Z]$");
 
-    private RegionSkaneLocalReserveNumberIdentifier(string value, PersonIdentifierParts parts)
+    private RegionSkaneLocalReserveNumber(string value, PersonIdentifierParts parts)
         : base(value, parts)
     {
     }
@@ -18,12 +18,12 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
 
     public override string Oid => PersonIdentifierOids.LocalReserveNumberRegionSkane;
 
-    public static new RegionSkaneLocalReserveNumberIdentifier Parse(string value) =>
+    public static new RegionSkaneLocalReserveNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new RegionSkaneLocalReserveNumberIdentifierFormatException();
+            : throw new RegionSkaneLocalReserveNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out RegionSkaneLocalReserveNumberIdentifier? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier)
     {
         GuardAgainst.Null(value);
 
@@ -33,7 +33,7 @@ public sealed class RegionSkaneLocalReserveNumberIdentifier : LocalReserveNumber
             return false;
         }
 
-        var parts = new RegionSkaneLocalReserveNumberIdentifierParts(value);
+        var parts = new RegionSkaneLocalReserveNumberParts(value);
         if (!TryGetDateOfBirth(out var dateOfBirth))
         {
             return false;
