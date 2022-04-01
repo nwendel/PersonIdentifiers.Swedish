@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Local;
+using PersonIdentifiers.Swedish.Options;
 
 namespace PersonIdentifiers.Swedish;
 
@@ -40,8 +42,19 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
             ? identifier
             : throw new PersonIdentifierFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
+    public static PersonIdentifier Parse(string value, PersonIdentifierParseOptions options) =>
+        TryParse(value, options, out var identifier)
+            ? identifier
+            : throw new PersonIdentifierFormatException();
+
+    public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier) =>
+        TryParse(value, PersonIdentifierParseOptions.Default, out identifier);
+
+    public static bool TryParse(string value, PersonIdentifierParseOptions options, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {
+        GuardAgainst.Null(value);
+        GuardAgainst.Null(options);
+
         if (PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber))
         {
             identifier = personalIdentityNumber;
@@ -57,6 +70,12 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
         if (NationalReserveNumber.TryParse(value, out var nationalReserveNumber))
         {
             identifier = nationalReserveNumber;
+            return true;
+        }
+
+        if (options.AllowLocal && LocalReserveNumber.TryParse(value, options, out var localReserveNumber))
+        {
+            identifier = localReserveNumber;
             return true;
         }
 

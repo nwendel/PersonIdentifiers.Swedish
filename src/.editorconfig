@@ -151,3 +151,6 @@ dotnet_diagnostic.CS8524.severity = none
 
 # IDE0062: Make local function 'static'
 dotnet_diagnostic.IDE0062.severity = error
+
+# IDE0090: Use 'new(...)'
+dotnet_diagnostic.IDE0090.severity = error
