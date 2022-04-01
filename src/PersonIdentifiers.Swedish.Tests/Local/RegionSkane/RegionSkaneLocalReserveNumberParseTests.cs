@@ -1,4 +1,4 @@
-﻿using NodaTime;
+﻿using System;
 using PersonIdentifiers.Swedish.Local.RegionSkane;
 using PersonIdentifiers.Swedish.Tests.TestData;
 using Xunit;
@@ -9,7 +9,7 @@ public class RegionSkaneLocalReserveNumberParseTests
 {
     [Theory]
     [ClassData(typeof(RegionSkaneLocalReserveNumbersTheoryData))]
-    public void CanTryParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
+    public void CanTryParse(string value, PersonIdentifierKind kind, DateOnly? dateOfBirth, PersonIdentifierGender? gender)
     {
         if (RegionSkaneLocalReserveNumber.TryParse(value, out var identifier))
         {

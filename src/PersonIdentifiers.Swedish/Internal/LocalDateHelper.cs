@@ -35,11 +35,10 @@ public static class LocalDateHelper
         return true;
     }
 
-    public static LocalDate Today()
+    public static DateOnly Today()
     {
-        var now = SystemClock.Instance.GetCurrentInstant();
-        var tz = DateTimeZoneProviders.Tzdb.GetSystemDefault();
-        var today = now.InZone(tz).Date;
+        var now = DateTime.Now;
+        var today = DateOnly.FromDateTime(now);
         return today;
     }
 }

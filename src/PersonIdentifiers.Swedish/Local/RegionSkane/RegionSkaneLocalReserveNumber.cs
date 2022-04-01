@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish.Local.RegionSkane;
@@ -51,13 +50,13 @@ public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
         };
         return true;
 
-        bool TryGetDateOfBirth([NotNullWhen(true)] out LocalDate? dateOfBirth) => parts.Kind switch
+        bool TryGetDateOfBirth([NotNullWhen(true)] out DateOnly? dateOfBirth) => parts.Kind switch
         {
             RegionSkaneLocalReserveNumberKind.Short => TryGetDateOfBirthShort(out dateOfBirth),
             RegionSkaneLocalReserveNumberKind.Long => LocalDateHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out dateOfBirth),
         };
 
-        bool TryGetDateOfBirthShort(out LocalDate? dateOfBirth)
+        bool TryGetDateOfBirthShort(out DateOnly? dateOfBirth)
         {
             // TODO: If guess the century logic is needed elsewhere then refactor this out from here
             var year = parts.Year + 2000;
