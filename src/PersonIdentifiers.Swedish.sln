@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B1795ACE-158E-427C-86AC-D71BE5A91927}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B936A939-1E9F-4DAF-9596-D8346629D275}"
@@ -14,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.Tests", "PersonIdentifiers.Swedish.Tests\PersonIdentifiers.Swedish.Tests.csproj", "{D9BDD970-CEE4-41DE-87A4-F90DBBCC23CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonIdentifiers.Swedish.Tests.Conventions", "PersonIdentifiers.Swedish.Tests.Conventions\PersonIdentifiers.Swedish.Tests.Conventions.csproj", "{C7A6C254-4D0A-4DFE-AF5F-BBC83B84F85F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.Tests.Conventions", "PersonIdentifiers.Swedish.Tests.Conventions\PersonIdentifiers.Swedish.Tests.Conventions.csproj", "{C7A6C254-4D0A-4DFE-AF5F-BBC83B84F85F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
