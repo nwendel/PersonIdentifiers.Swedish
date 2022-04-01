@@ -1,17 +1,16 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using NodaTime;
+using System.Globalization;
 
 namespace PersonIdentifiers.Swedish.Internal;
 
 public static class LocalDateHelper
 {
-    private static readonly CalendarSystem _calendar = CalendarSystem.Iso;
-    private static readonly int _minYear = _calendar.MinYear;
-    private static readonly int _maxYear = _calendar.MaxYear;
+    private static readonly GregorianCalendar _calendar = new();
+    private static readonly int _minYear = _calendar.MinSupportedDateTime.Year;
+    private static readonly int _maxYear = _calendar.MaxSupportedDateTime.Year;
 
-    // TODO: Standard method in NodaTime?
-    //       Or extension method?
-    public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out LocalDate? dateOfBirth)
+    // TODO: Standard method in Bcl?
+    public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out DateOnly? dateOfBirth)
     {
         dateOfBirth = default;
 
@@ -26,7 +25,7 @@ public static class LocalDateHelper
             return false;
         }
 
-        var daysInMonth = CalendarSystem.Iso.GetDaysInMonth(year, month);
+        var daysInMonth = _calendar.GetDaysInMonth(year, month);
         if (day < 1 || day > daysInMonth)
         {
             return false;

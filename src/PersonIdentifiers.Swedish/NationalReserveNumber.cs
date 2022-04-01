@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
@@ -69,7 +68,7 @@ public sealed class NationalReserveNumber :
             century == 0 ||
             (century >= 22 && century <= 78 && (century - 22) % 3 == 0);
 
-        bool TryGetDateOfBirth(out LocalDate? dateOfBirth)
+        bool TryGetDateOfBirth(out DateOnly? dateOfBirth)
         {
             dateOfBirth = default;
 

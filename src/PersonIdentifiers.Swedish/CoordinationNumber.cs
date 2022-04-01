@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
@@ -22,7 +21,7 @@ public sealed class CoordinationNumber :
 
     public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
-    public new LocalDate DateOfBirth
+    public new DateOnly DateOfBirth
     {
         get => base.DateOfBirth ?? throw new UnreachableCodeException($"{nameof(DateOfBirth)} is null");
         private set => base.DateOfBirth = value;
