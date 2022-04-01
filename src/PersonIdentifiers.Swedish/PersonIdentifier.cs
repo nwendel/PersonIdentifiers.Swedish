@@ -3,6 +3,7 @@ using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
+// TODO: Possibly use struct?
 public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdentifierParts>
 {
     private readonly string _value;
