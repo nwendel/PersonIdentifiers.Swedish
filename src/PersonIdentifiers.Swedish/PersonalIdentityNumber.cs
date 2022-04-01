@@ -50,7 +50,7 @@ public sealed class PersonalIdentityNumber :
         }
 
         var parts = new StandardPersonIdentifierParts(value);
-        if (!LocalDateHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
+        if (!DateOnlyHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
         {
             return false;
         }

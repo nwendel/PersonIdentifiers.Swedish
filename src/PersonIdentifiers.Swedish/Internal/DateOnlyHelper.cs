@@ -3,16 +3,15 @@ using System.Globalization;
 
 namespace PersonIdentifiers.Swedish.Internal;
 
-public static class LocalDateHelper
+public static class DateOnlyHelper
 {
     private static readonly GregorianCalendar _calendar = new();
     private static readonly int _minYear = _calendar.MinSupportedDateTime.Year;
     private static readonly int _maxYear = _calendar.MaxSupportedDateTime.Year;
 
-    // TODO: Standard method in Bcl?
-    public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out DateOnly? dateOfBirth)
+    public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out DateOnly? date)
     {
-        dateOfBirth = default;
+        date = default;
 
         if (year < _minYear || year > _maxYear)
         {
@@ -31,7 +30,7 @@ public static class LocalDateHelper
             return false;
         }
 
-        dateOfBirth = new(year, month, day);
+        date = new(year, month, day);
         return true;
     }
 }
