@@ -1,9 +1,9 @@
-﻿using NodaTime;
+﻿using System;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.TestData;
 
-public class InvalidNationalReserveNumbersTheoryData : TheoryData<string, PersonIdentifierKind, LocalDate?, PersonIdentifierGender?>
+public class InvalidNationalReserveNumbersTheoryData : TheoryData<string, PersonIdentifierKind, DateOnly?, PersonIdentifierGender?>
 {
     public InvalidNationalReserveNumbersTheoryData()
     {

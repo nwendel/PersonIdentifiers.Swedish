@@ -1,5 +1,4 @@
 ﻿using System;
-using NodaTime;
 using PersonIdentifiers.Swedish.Tests.TestData;
 using Xunit;
 
@@ -11,7 +10,7 @@ public class PersonIdentifierParseTests
     [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
     [ClassData(typeof(CoordinationNumbersTheoryData))]
     [ClassData(typeof(NationalReserveNumbersTheoryData))]
-    public void CanTryParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
+    public void CanTryParse(string value, PersonIdentifierKind kind, DateOnly? dateOfBirth, PersonIdentifierGender? gender)
     {
         if (PersonIdentifier.TryParse(value, out var identifier))
         {
@@ -37,7 +36,7 @@ public class PersonIdentifierParseTests
     [ClassData(typeof(PersonalIdentityNumbersTheoryData))]
     [ClassData(typeof(CoordinationNumbersTheoryData))]
     [ClassData(typeof(NationalReserveNumbersTheoryData))]
-    public void CanParse(string value, PersonIdentifierKind kind, LocalDate? dateOfBirth, PersonIdentifierGender? gender)
+    public void CanParse(string value, PersonIdentifierKind kind, DateOnly? dateOfBirth, PersonIdentifierGender? gender)
     {
         var identifier = PersonIdentifier.Parse(value);
 

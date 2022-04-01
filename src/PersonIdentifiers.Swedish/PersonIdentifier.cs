@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Local;
 using PersonIdentifiers.Swedish.Options;
@@ -28,7 +27,7 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
     [MemberNotNullWhen(true, nameof(DateOfBirth))]
     public bool IsDateOfBirthKnown => DateOfBirth.HasValue;
 
-    public LocalDate? DateOfBirth { get; protected set; }
+    public DateOnly? DateOfBirth { get; protected set; }
 
     [MemberNotNullWhen(true, nameof(Gender))]
     public bool IsGenderKnown => Gender.HasValue;
