@@ -53,21 +53,21 @@ public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
         bool TryGetDateOfBirth([NotNullWhen(true)] out DateOnly? dateOfBirth) => parts.Kind switch
         {
             RegionSkaneLocalReserveNumberKind.Short => TryGetDateOfBirthShort(out dateOfBirth),
-            RegionSkaneLocalReserveNumberKind.Long => LocalDateHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out dateOfBirth),
+            RegionSkaneLocalReserveNumberKind.Long => DateOnlyHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out dateOfBirth),
         };
 
         bool TryGetDateOfBirthShort(out DateOnly? dateOfBirth)
         {
             // TODO: If guess the century logic is needed elsewhere then refactor this out from here
             var year = parts.Year + 2000;
-            if (LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth) &&
-                dateOfBirth <= LocalDateHelper.Today())
+            if (DateOnlyHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth) &&
+                dateOfBirth <= DateOnlyHelper.Today())
             {
                 return true;
             }
 
             year -= 100;
-            if (!LocalDateHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth))
+            if (!DateOnlyHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth))
             {
                 return false;
             }
