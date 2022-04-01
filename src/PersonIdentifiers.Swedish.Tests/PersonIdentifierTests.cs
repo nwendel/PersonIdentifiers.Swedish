@@ -1,16 +1,15 @@
 ﻿using Xunit;
 
-namespace PersonIdentifiers.Swedish.Tests
-{
-    public class PersonIdentifierTests
-    {
-        [Fact]
-        public void CanToString()
-        {
-            var pnr = "191212121212";
-            var identifier = PersonIdentifier.Parse(pnr);
+namespace PersonIdentifiers.Swedish.Tests;
 
-            Assert.Equal(pnr, identifier.ToString());
-        }
+public class PersonIdentifierTests
+{
+    [Fact]
+    public void CanToString()
+    {
+        var personalIdentityNumber = "191212121212";
+        var identifier = PersonIdentifier.Parse(personalIdentityNumber);
+
+        Assert.Equal(personalIdentityNumber, identifier.ToString());
     }
 }

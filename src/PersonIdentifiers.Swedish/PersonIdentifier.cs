@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
@@ -23,7 +22,13 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
 
     public virtual PersonIdentifierParts Parts { get; }
 
-    public LocalDate? DateOfBirth { get; protected set; }
+    [MemberNotNullWhen(true, nameof(DateOfBirth))]
+    public bool IsDateOfBirthKnown => DateOfBirth.HasValue;
+
+    public DateOnly? DateOfBirth { get; protected set; }
+
+    [MemberNotNullWhen(true, nameof(Gender))]
+    public bool IsGenderKnown => Gender.HasValue;
 
     public PersonIdentifierGender? Gender { get; protected set; }
 
@@ -36,21 +41,21 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {
-        if (PersonalNumberIdentifier.TryParse(value, out var personalNumberIdentifier))
+        if (PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber))
         {
-            identifier = personalNumberIdentifier;
+            identifier = personalIdentityNumber;
             return true;
         }
 
-        if (CoordinationNumberIdentifier.TryParse(value, out var coordinationNumberIdentifier))
+        if (CoordinationNumber.TryParse(value, out var coordinationNumber))
         {
-            identifier = coordinationNumberIdentifier;
+            identifier = coordinationNumber;
             return true;
         }
 
-        if (NationalReserveNumberIdentifier.TryParse(value, out var nationalReserveNumberIdentifier))
+        if (NationalReserveNumber.TryParse(value, out var nationalReserveNumber))
         {
-            identifier = nationalReserveNumberIdentifier;
+            identifier = nationalReserveNumber;
             return true;
         }
 

@@ -1,45 +1,45 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
 
-public sealed class CoordinationNumberIdentifier :
+// https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html
+public sealed class PersonalIdentityNumber :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
 {
-    private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([6-9]){1})(\d{1})(([0-9]){4})$");
+    private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([0-3]){1})(\d{1})(([0-9]){4})$");
 
-    private CoordinationNumberIdentifier(string value, StandardPersonIdentifierParts parts)
+    private PersonalIdentityNumber(string value, StandardPersonIdentifierParts parts)
         : base(value, parts)
     {
     }
 
-    public override PersonIdentifierKind Kind => PersonIdentifierKind.CoordinationNumber;
+    public override PersonIdentifierKind Kind => PersonIdentifierKind.PersonalIdentityNumber;
 
-    public override string Oid => PersonIdentifierOids.CoordinationNumber;
+    public override string Oid => PersonIdentifierOids.PersonalNumber;
 
     public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
-    public new LocalDate DateOfBirth
+    public new DateOnly DateOfBirth
     {
-        get => base.DateOfBirth ?? throw new UnreachableCodeException();
+        get => base.DateOfBirth ?? throw new UnreachableCodeException($"{nameof(DateOfBirth)} is null");
         private set => base.DateOfBirth = value;
     }
 
     public new PersonIdentifierGender Gender
     {
-        get => base.Gender ?? throw new UnreachableCodeException();
+        get => base.Gender ?? throw new UnreachableCodeException($"{nameof(Gender)} is null");
         private set => base.Gender = value;
     }
 
-    public static new CoordinationNumberIdentifier Parse(string value) =>
+    public static new PersonalIdentityNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new CoordinationNumberIdentifierFormatException();
+            : throw new PersonalIdentityNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out CoordinationNumberIdentifier? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out PersonalIdentityNumber? identifier)
     {
         GuardAgainst.Null(value);
 
@@ -50,14 +50,12 @@ public sealed class CoordinationNumberIdentifier :
         }
 
         var parts = new StandardPersonIdentifierParts(value);
-        var day = parts.Day - 60;
-
-        if (!LocalDateHelper.IsValidDate(parts.Year, parts.Month, day, out var dateOfBirth))
+        if (!DateOnlyHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
         {
             return false;
         }
 
-        identifier = new CoordinationNumberIdentifier(value, parts)
+        identifier = new PersonalIdentityNumber(value, parts)
         {
             DateOfBirth = dateOfBirth.Value,
             Gender = GetGender(),
