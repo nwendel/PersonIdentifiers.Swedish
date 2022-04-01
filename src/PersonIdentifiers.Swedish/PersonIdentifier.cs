@@ -41,25 +41,23 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {
-        if (PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber))
+        var parsers = new Func<PersonIdentifier?>[]
         {
-            identifier = personalIdentityNumber;
-            return true;
+            () => PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber) ? personalIdentityNumber : null,
+            () => CoordinationNumber.TryParse(value, out var coordinationNumber) ? coordinationNumber : null,
+            () => NationalReserveNumber.TryParse(value, out var nationalReserveNumber) ? nationalReserveNumber : null,
+        };
+
+        foreach (var parser in parsers)
+        {
+            identifier = parser();
+            if (identifier != null)
+            {
+                return true;
+            }
         }
 
-        if (CoordinationNumber.TryParse(value, out var coordinationNumber))
-        {
-            identifier = coordinationNumber;
-            return true;
-        }
-
-        if (NationalReserveNumber.TryParse(value, out var nationalReserveNumber))
-        {
-            identifier = nationalReserveNumber;
-            return true;
-        }
-
-        identifier = null;
+        identifier = default;
         return false;
     }
 
