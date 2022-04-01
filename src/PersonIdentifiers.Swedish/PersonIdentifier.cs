@@ -54,13 +54,7 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
         GuardAgainst.Null(value);
         GuardAgainst.Null(options);
 
-        var parsers = new Func<PersonIdentifier?>[]
-        {
-            () => PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber) ? personalIdentityNumber : null,
-            () => CoordinationNumber.TryParse(value, out var coordinationNumber) ? coordinationNumber : null,
-            () => NationalReserveNumber.TryParse(value, out var nationalReserveNumber) ? nationalReserveNumber : null,
-        };
-
+        var parsers = GetParsers();
         foreach (var parser in parsers)
         {
             identifier = parser();
@@ -70,15 +64,25 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
             }
         }
 
-        // TODO: This should be part of the array above isntead of separate
-        if (options.AllowLocal && LocalReserveNumber.TryParse(value, options, out var localReserveNumber))
-        {
-            identifier = localReserveNumber;
-            return true;
-        }
-
         identifier = default;
         return false;
+
+        List<Func<PersonIdentifier?>> GetParsers()
+        {
+            var parsers = new List<Func<PersonIdentifier?>>
+            {
+                () => PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber) ? personalIdentityNumber : null,
+                () => CoordinationNumber.TryParse(value, out var coordinationNumber) ? coordinationNumber : null,
+                () => NationalReserveNumber.TryParse(value, out var nationalReserveNumber) ? nationalReserveNumber : null,
+            };
+
+            if (options.AllowLocal)
+            {
+                parsers.Add(() => LocalReserveNumber.TryParse(value, options, out var localReserveNumber) ? localReserveNumber : null);
+            }
+
+            return parsers;
+        }
     }
 
     public override string ToString()
