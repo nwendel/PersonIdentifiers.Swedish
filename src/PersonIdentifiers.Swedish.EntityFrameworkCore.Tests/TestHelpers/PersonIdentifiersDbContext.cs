@@ -15,11 +15,11 @@ public class PersonIdentifiersDbContext : DbContext
 
     public DbSet<PersonIdentifierEntity> PersonIdentifiers => Set<PersonIdentifierEntity>();
 
-    public DbSet<PersonalNumberIdentifierEntity> PersonalNumberIdentifiers => Set<PersonalNumberIdentifierEntity>();
+    public DbSet<PersonalIdentityNumberEntity> PersonalNumberIdentifiers => Set<PersonalIdentityNumberEntity>();
 
-    public DbSet<CoordinationNumberIdentifierEntity> CoordinationNumberIdentifiers => Set<CoordinationNumberIdentifierEntity>();
+    public DbSet<CoordinationNumberEntity> CoordinationNumberIdentifiers => Set<CoordinationNumberEntity>();
 
-    public DbSet<NationalReserveNumberIdentifierEntity> NationalReserveNumberIdentifiers => Set<NationalReserveNumberIdentifierEntity>();
+    public DbSet<NationalReserveNumberEntity> NationalReserveNumberIdentifiers => Set<NationalReserveNumberEntity>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {

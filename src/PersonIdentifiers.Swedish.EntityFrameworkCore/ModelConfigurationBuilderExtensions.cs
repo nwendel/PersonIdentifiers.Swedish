@@ -13,16 +13,16 @@ public static class ModelConfigurationBuilderExtensions
             .HaveMaxLength(12)
             .HaveConversion<PersonIdentifierValueConverter>();
 
-        self.Properties<PersonalNumberIdentifier>()
+        self.Properties<PersonalIdentityNumber>()
             .HaveMaxLength(12)
-            .HaveConversion<PersonalNumberIdentifierValueConverter>();
+            .HaveConversion<PersonalIdentityNumberValueConverter>();
 
-        self.Properties<CoordinationNumberIdentifier>()
+        self.Properties<CoordinationNumber>()
             .HaveMaxLength(12)
-            .HaveConversion<CoordinationNumberIdentifierValueConverter>();
+            .HaveConversion<CoordinationNumberValueConverter>();
 
-        self.Properties<NationalReserveNumberIdentifier>()
+        self.Properties<NationalReserveNumber>()
             .HaveMaxLength(12)
-            .HaveConversion<NationalReserveNumberIdentifierValueConverter>();
+            .HaveConversion<NationalReserveNumberValueConverter>();
     }
 }

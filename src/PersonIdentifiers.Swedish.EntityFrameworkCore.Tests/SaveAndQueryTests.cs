@@ -30,10 +30,10 @@ public class SaveAndQueryTests
     }
 
     [Fact]
-    public void CanPersonalNumberIdentifier()
+    public void CanPersonalIdentityNumber()
     {
-        var identifier = PersonalNumberIdentifier.Parse(_personalNumber);
-        var entity = new PersonalNumberIdentifierEntity(identifier);
+        var identifier = PersonalIdentityNumber.Parse(_personalNumber);
+        var entity = new PersonalIdentityNumberEntity(identifier);
 
         using var dbContext = new PersonIdentifiersDbContext(_databaseName);
         dbContext.Add(entity);
@@ -46,10 +46,10 @@ public class SaveAndQueryTests
     }
 
     [Fact]
-    public void CanCoordinationNumberIdentifier()
+    public void CanCoordinationNumber()
     {
-        var identifier = CoordinationNumberIdentifier.Parse(_coordinationNumber);
-        var entity = new CoordinationNumberIdentifierEntity(identifier);
+        var identifier = CoordinationNumber.Parse(_coordinationNumber);
+        var entity = new CoordinationNumberEntity(identifier);
 
         using var dbContext = new PersonIdentifiersDbContext(_databaseName);
         dbContext.Add(entity);
@@ -62,10 +62,10 @@ public class SaveAndQueryTests
     }
 
     [Fact]
-    public void CanNationalReserveNumberIdentifier()
+    public void CanNationalReserveNumber()
     {
-        var identifier = NationalReserveNumberIdentifier.Parse(_nationalReserveNumber);
-        var entity = new NationalReserveNumberIdentifierEntity(identifier);
+        var identifier = NationalReserveNumber.Parse(_nationalReserveNumber);
+        var entity = new NationalReserveNumberEntity(identifier);
 
         using var dbContext = new PersonIdentifiersDbContext(_databaseName);
         dbContext.Add(entity);
