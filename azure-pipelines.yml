@@ -11,15 +11,19 @@ pool:
 
 variables:
   solution: '**/*.sln'
-  projects: '**/*.csproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
 steps:
 - task: DotNetCoreCLI@2
   inputs:
+    command: 'restore'
+    projects: '${solution}'
+
+- task: DotNetCoreCLI@2
+  inputs:
     command: 'build'
-    projects: '**/*.csproj'
+    projects: '${solution}'
 
 #steps:
 #- task: NuGetToolInstaller@1
