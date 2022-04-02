@@ -33,7 +33,7 @@ steps:
   inputs:
     command: 'test'
     projects: '$(solution)'
-    arguments: '/p:settings="**/CodeCoverage.runsettings" --collect "Code coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
+    arguments: '--settings="CodeCoverage.runsettings" --collect "Code coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
 
 - task: PublishCodeCoverageResults@1
   inputs:
