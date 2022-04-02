@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  nuget.cert.revocation.mode: offline
 
 steps:
 - task: DotNetCoreCLI@2
