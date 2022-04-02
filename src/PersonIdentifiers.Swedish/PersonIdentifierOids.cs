@@ -16,7 +16,7 @@ public static class PersonIdentifierOids
 
         var oid = kind switch
         {
-            PersonIdentifierKind.PersonalNumber => PersonalNumber,
+            PersonIdentifierKind.PersonalIdentityNumber => PersonalNumber,
             PersonIdentifierKind.CoordinationNumber => CoordinationNumber,
             PersonIdentifierKind.NationalReserveNumber => NationalReserveNumber,
         };

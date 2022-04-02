@@ -1,11 +1,11 @@
-﻿using NodaTime;
+﻿using System;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.TestData;
 
-public class InvalidNationalReserveNumberIdentifiersTheoryData : TheoryData<string, PersonIdentifierKind, LocalDate?, PersonIdentifierGender?>
+public class InvalidNationalReserveNumbersTheoryData : TheoryData<string, PersonIdentifierKind, DateOnly?, PersonIdentifierGender?>
 {
-    public InvalidNationalReserveNumberIdentifiersTheoryData()
+    public InvalidNationalReserveNumbersTheoryData()
     {
         Add("19790914AA05", PersonIdentifierKind.NationalReserveNumber, default, default); /* Invalid century */
         Add("23790914AA09", PersonIdentifierKind.NationalReserveNumber, default, default); /* Invalid century */

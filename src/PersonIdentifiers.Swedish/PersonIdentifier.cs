@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using NodaTime;
 using PersonIdentifiers.Swedish.Internal;
 
 namespace PersonIdentifiers.Swedish;
@@ -23,7 +22,13 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
 
     public virtual PersonIdentifierParts Parts { get; }
 
-    public LocalDate? DateOfBirth { get; protected set; }
+    [MemberNotNullWhen(true, nameof(DateOfBirth))]
+    public bool IsDateOfBirthKnown => DateOfBirth.HasValue;
+
+    public DateOnly? DateOfBirth { get; protected set; }
+
+    [MemberNotNullWhen(true, nameof(Gender))]
+    public bool IsGenderKnown => Gender.HasValue;
 
     public PersonIdentifierGender? Gender { get; protected set; }
 
@@ -36,25 +41,23 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {
-        if (PersonalNumberIdentifier.TryParse(value, out var personalNumberIdentifier))
+        var parsers = new Func<PersonIdentifier?>[]
         {
-            identifier = personalNumberIdentifier;
-            return true;
+            () => PersonalIdentityNumber.TryParse(value, out var personalIdentityNumber) ? personalIdentityNumber : null,
+            () => CoordinationNumber.TryParse(value, out var coordinationNumber) ? coordinationNumber : null,
+            () => NationalReserveNumber.TryParse(value, out var nationalReserveNumber) ? nationalReserveNumber : null,
+        };
+
+        foreach (var parser in parsers)
+        {
+            identifier = parser();
+            if (identifier != null)
+            {
+                return true;
+            }
         }
 
-        if (CoordinationNumberIdentifier.TryParse(value, out var coordinationNumberIdentifier))
-        {
-            identifier = coordinationNumberIdentifier;
-            return true;
-        }
-
-        if (NationalReserveNumberIdentifier.TryParse(value, out var nationalReserveNumberIdentifier))
-        {
-            identifier = nationalReserveNumberIdentifier;
-            return true;
-        }
-
-        identifier = null;
+        identifier = default;
         return false;
     }
 
