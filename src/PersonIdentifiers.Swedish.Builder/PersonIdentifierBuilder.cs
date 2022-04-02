@@ -1,7 +1,6 @@
 ﻿namespace PersonIdentifiers.Swedish.Testing
 {
-    public class Class1
+    public class PersonIdentifierBuilder
     {
-
     }
 }
