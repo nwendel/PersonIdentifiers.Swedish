@@ -19,7 +19,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '${projects}'
+    projects: '**/*.csproj'
 
 #steps:
 #- task: NuGetToolInstaller@1
