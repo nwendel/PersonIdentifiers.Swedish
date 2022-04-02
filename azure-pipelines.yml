@@ -15,20 +15,47 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@1
+#- task: DotNetCoreCLI@2
+#  displayName: 'Restore dependencies'
+#  inputs:
+#    command: 'restore'
+#    projects: '$(solution)'
 
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
-    restoreSolution: '$(solution)'
+    command: 'build'
+    projects: '$(solution)'
+    arguments: '--configuration $(BuildConfiguration)'
 
-- task: VSBuild@1
+- task: DotNetCoreCLI@2
+  displayName: 'Test'
   inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'test'
+    projects: '$(solution)'
+    arguments: '--settings="src/CodeCoverage.runsettings" --collect "Code coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
 
-- task: VSTest@2
+- task: PublishCodeCoverageResults@1
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/*.cobertura.xml'
+    failIfCoverageEmpty: true
+
+#steps:
+#- task: NuGetToolInstaller@1
+
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
+
+#- task: VSBuild@1
+#  inputs:
+#    solution: '$(solution)'
+#    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
+
+#- task: VSTest@2
+#  inputs:
+#    platform: '$(buildPlatform)'
+#    configuration: '$(buildConfiguration)'
