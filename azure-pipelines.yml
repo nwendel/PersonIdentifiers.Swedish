@@ -33,6 +33,7 @@ steps:
   inputs:
     command: 'test'
     projects: '$(solution)'
+    arguments: '--collect "Code coverage"'
 
 #steps:
 #- task: NuGetToolInstaller@1
