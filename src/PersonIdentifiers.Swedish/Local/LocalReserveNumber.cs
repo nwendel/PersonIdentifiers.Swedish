@@ -17,9 +17,7 @@ public abstract class LocalReserveNumber : PersonIdentifier
     public abstract LocalReserveNumberPrincipal Principal { get; }
 
     public static new LocalReserveNumber Parse(string value) =>
-        TryParse(value, out var identifier)
-            ? identifier
-            : throw new LocalReserveNumberFormatException();
+        Parse(value, PersonIdentifierParseOptions.Default);
 
     public static new LocalReserveNumber Parse(string value, PersonIdentifierParseOptions options) =>
         TryParse(value, options, out var identifier)
@@ -49,6 +47,8 @@ public abstract class LocalReserveNumber : PersonIdentifier
 
         List<Func<LocalReserveNumber?>> GetParsers()
         {
+            // TODO: Which parsers to add?
+            //       Support multiple at same time or just one?
             var parsers = new List<Func<LocalReserveNumber?>>
             {
                 () => RegionSkaneLocalReserveNumber.TryParse(value, out var localReserveNumber) ? localReserveNumber : null,
