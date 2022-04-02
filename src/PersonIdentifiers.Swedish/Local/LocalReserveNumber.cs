@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Local.RegionSkane;
 using PersonIdentifiers.Swedish.Options;
 
 namespace PersonIdentifiers.Swedish.Local;
@@ -29,6 +31,30 @@ public abstract class LocalReserveNumber : PersonIdentifier
 
     public static bool TryParse(string value, PersonIdentifierParseOptions options, [NotNullWhen(true)] out LocalReserveNumber? identifier)
     {
-        throw new NotImplementedException();
+        GuardAgainst.Null(value);
+        GuardAgainst.Null(options);
+
+        var parsers = GetParsers();
+        foreach (var parser in parsers)
+        {
+            identifier = parser();
+            if (identifier != null)
+            {
+                return true;
+            }
+        }
+
+        identifier = default;
+        return false;
+
+        List<Func<LocalReserveNumber?>> GetParsers()
+        {
+            var parsers = new List<Func<LocalReserveNumber?>>
+            {
+                () => RegionSkaneLocalReserveNumber.TryParse(value, out var localReserveNumber) ? localReserveNumber : null,
+            };
+
+            return parsers;
+        }
     }
 }
