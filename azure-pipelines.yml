@@ -18,12 +18,12 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
-    projects: '${solution}'
+    projects: '$(solution)'
 
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: '${solution}'
+    projects: '$(solution)'
 
 #steps:
 #- task: NuGetToolInstaller@1
