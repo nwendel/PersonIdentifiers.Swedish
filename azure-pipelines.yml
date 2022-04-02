@@ -26,19 +26,19 @@ steps:
   inputs:
     command: 'build'
     projects: '$(solution)'
-    arguments: '/p:Configuration=$(BuildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
     command: 'test'
     projects: '$(solution)'
-    arguments: '--collect "Code coverage"'
+    arguments: '--collect "Code coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
 
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '**/*.coverage'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
     failIfCoverageEmpty: true
 
 #steps:
