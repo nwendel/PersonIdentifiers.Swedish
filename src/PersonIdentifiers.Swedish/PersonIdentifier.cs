@@ -37,9 +37,7 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
     public string Value => _value;
 
     public static PersonIdentifier Parse(string value) =>
-        TryParse(value, out var identifier)
-            ? identifier
-            : throw new PersonIdentifierFormatException();
+        Parse(value, PersonIdentifierParseOptions.Default);
 
     public static PersonIdentifier Parse(string value, PersonIdentifierParseOptions options) =>
         TryParse(value, options, out var identifier)
