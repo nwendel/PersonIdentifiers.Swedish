@@ -20,7 +20,7 @@ public sealed class PersonalIdentityNumber :
 
     public override PersonIdentifierKind Kind => PersonIdentifierKind.PersonalIdentityNumber;
 
-    public override string Oid => PersonIdentifierOids.PersonalNumber;
+    public override string Oid => PersonIdentifierOids.PersonalIdentityNumber;
 
     public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
