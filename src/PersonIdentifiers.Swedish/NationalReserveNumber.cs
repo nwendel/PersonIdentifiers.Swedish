@@ -5,9 +5,11 @@ using PersonIdentifiers.Swedish.Internal;
 namespace PersonIdentifiers.Swedish;
 
 // https://confluence.cgiostersund.se/display/PU/Nationellt+Reservid
+[SuppressMessage("Design", "CA1067:Override Object.Equals(object) when implementing IEquatable<T>", Justification = "Not needed, overriden correctly in PersonIdentifier")]
 public sealed class NationalReserveNumber :
     PersonIdentifier,
-    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
+    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>,
+    IEquatable<NationalReserveNumber>
 {
     private static readonly Regex _pattern = new(@"^([0-9]{8})((?![IOQVW])[A-Z]{2}[0-9]{2}|(?![IOQVW])[A-Z]{3}[0-9]{1})$");
 
@@ -114,4 +116,6 @@ public sealed class NationalReserveNumber :
                 : PersonIdentifierGender.Female;
         }
     }
+
+    public bool Equals(NationalReserveNumber? other) => Value == other?.Value;
 }
