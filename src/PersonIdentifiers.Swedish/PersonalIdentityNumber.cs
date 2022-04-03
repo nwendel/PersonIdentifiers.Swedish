@@ -5,9 +5,11 @@ using PersonIdentifiers.Swedish.Internal;
 namespace PersonIdentifiers.Swedish;
 
 // https://www.skatteverket.se/servicelankar/otherlanguages/inenglish/individualsandemployees/livinginsweden/personalidentitynumberandcoordinationnumber.4.2cf1b5cd163796a5c8b4295.html
+[SuppressMessage("Design", "CA1067:Override Object.Equals(object) when implementing IEquatable<T>", Justification = "Not needed, overriden correctly in PersonIdentifier")]
 public sealed class PersonalIdentityNumber :
     PersonIdentifier,
-    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
+    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>,
+    IEquatable<PersonalIdentityNumber>
 {
     private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([0-3]){1})(\d{1})(([0-9]){4})$");
 
@@ -18,7 +20,7 @@ public sealed class PersonalIdentityNumber :
 
     public override PersonIdentifierKind Kind => PersonIdentifierKind.PersonalIdentityNumber;
 
-    public override string Oid => PersonIdentifierOids.PersonalNumber;
+    public override string Oid => PersonIdentifierOids.PersonalIdentityNumber;
 
     public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
 
@@ -71,4 +73,6 @@ public sealed class PersonalIdentityNumber :
                 : PersonIdentifierGender.Female;
         }
     }
+
+    public bool Equals(PersonalIdentityNumber? other) => Value == other?.Value;
 }

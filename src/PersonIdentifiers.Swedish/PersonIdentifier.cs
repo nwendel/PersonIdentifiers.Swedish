@@ -5,7 +5,9 @@ using PersonIdentifiers.Swedish.Options;
 
 namespace PersonIdentifiers.Swedish;
 
-public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdentifierParts>
+public abstract class PersonIdentifier :
+    IPersonIdentifierPartsAware<PersonIdentifierParts>,
+    IEquatable<PersonIdentifier>
 {
     private readonly string _value;
 
@@ -82,6 +84,14 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
             return parsers;
         }
     }
+
+    public override bool Equals(object? obj) =>
+        obj is PersonIdentifier other &&
+        Equals(other);
+
+    public override int GetHashCode() => _value.GetHashCode(StringComparison.Ordinal);
+
+    public bool Equals(PersonIdentifier? other) => Value == other?.Value;
 
     public override string ToString()
     {
