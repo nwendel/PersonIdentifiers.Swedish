@@ -8,7 +8,7 @@ namespace PersonIdentifiers.Swedish;
 [SuppressMessage("Design", "CA1067:Override Object.Equals(object) when implementing IEquatable<T>", Justification = "Not needed, overriden correctly in PersonIdentifier")]
 public sealed class NationalReserveNumber :
     PersonIdentifier,
-    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>,
+    IPersonIdentifierPartsAware<NationalReserveNumberParts>,
     IEquatable<NationalReserveNumber>
 {
     private static readonly Regex _pattern = new(@"^([0-9]{8})((?![IOQVW])[A-Z]{2}[0-9]{2}|(?![IOQVW])[A-Z]{3}[0-9]{1})$");
@@ -24,7 +24,7 @@ public sealed class NationalReserveNumber :
 
     public override string Oid => PersonIdentifierOids.NationalReserveNumber;
 
-    public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
+    public override NationalReserveNumberParts Parts => (NationalReserveNumberParts)base.Parts;
 
     public static new NationalReserveNumber Parse(string value) =>
         TryParse(value, out var identifier)
