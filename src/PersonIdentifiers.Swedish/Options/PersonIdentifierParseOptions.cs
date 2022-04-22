@@ -1,5 +1,6 @@
 ﻿namespace PersonIdentifiers.Swedish.Options;
 
+// TODO: Skip the Options namespace?
 public class PersonIdentifierParseOptions
 {
     private PersonIdentifierParseOptions()

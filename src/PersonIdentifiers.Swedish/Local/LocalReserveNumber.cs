@@ -27,6 +27,7 @@ public abstract class LocalReserveNumber : PersonIdentifier
     public static bool TryParse(string value, [NotNullWhen(true)] out LocalReserveNumber? identifier) =>
         TryParse(value, PersonIdentifierParseOptions.Default, out identifier);
 
+    // TODO: Which options to pass in here?
     public static bool TryParse(string value, PersonIdentifierParseOptions options, [NotNullWhen(true)] out LocalReserveNumber? identifier)
     {
         GuardAgainst.Null(value);
@@ -49,9 +50,10 @@ public abstract class LocalReserveNumber : PersonIdentifier
         {
             // TODO: Which parsers to add?
             //       Support multiple at same time or just one?
+            // TODO: How to deal with options which are specific to local implementations?
             var parsers = new List<Func<LocalReserveNumber?>>
             {
-                () => RegionSkaneLocalReserveNumber.TryParse(value, out var localReserveNumber) ? localReserveNumber : null,
+                () => RegionSkaneLocalReserveNumber.TryParse(value, RegionSkaneLocalReserveNumberOptions.Default, out var localReserveNumber) ? localReserveNumber : null,
             };
 
             return parsers;

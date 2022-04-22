@@ -22,7 +22,10 @@ public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
             ? identifier
             : throw new RegionSkaneLocalReserveNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier) =>
+        TryParse(value, RegionSkaneLocalReserveNumberOptions.Default, out identifier);
+
+    public static bool TryParse(string value, RegionSkaneLocalReserveNumberOptions options, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier)
     {
         GuardAgainst.Null(value);
 
