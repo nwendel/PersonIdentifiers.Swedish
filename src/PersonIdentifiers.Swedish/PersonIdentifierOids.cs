@@ -9,7 +9,7 @@ public static class PersonIdentifierOids
 
     public const string CoordinationNumber = "1.2.752.129.2.1.3.3";
 
-    public const string NationalReserveNumber = "1.2.752.129.2.1.3.3";
+    public const string NationalReserveNumber = "1.2.752.74.9.1";
 
     public const string LocalReserveNumberIneraCarelink = "1.2.752.129.2.1.3.2";
 

@@ -7,14 +7,12 @@ namespace PersonIdentifiers.Swedish.Tests.TestHelpers;
 
 public static class ObjectExtensions
 {
-    public static void Set<T, TValue>(this T self, Expression<Func<T, TValue>> propertyExpression, TValue value)
+    public static void Set<T, TValue>(
+        this T self,
+        Expression<Func<T, TValue>> propertyExpression,
+        TValue value)
     {
         GuardAgainst.Null(propertyExpression);
-
-        if (propertyExpression == null)
-        {
-            throw new ArgumentNullException(nameof(propertyExpression));
-        }
 
         if (propertyExpression.Body is ParameterExpression)
         {
@@ -28,17 +26,19 @@ public static class ObjectExtensions
                 throw new ArgumentException("Not a valid property expression", nameof(propertyExpression));
             }
 
-            if (unaryExpression.Operand is not MemberExpression memberExpression2)
+            if (unaryExpression.Operand is not MemberExpression unaryMemberExpression)
             {
                 throw new ArgumentException("Not a valid property expression", nameof(propertyExpression));
             }
 
-            memberExpression = memberExpression2;
+            memberExpression = unaryMemberExpression;
         }
 
         var propertyName = memberExpression.Member.Name;
-        var property = typeof(T).GetProperties()
-            .First(x => x.Name == propertyName && x.CanWrite);
+        var property = typeof(T)
+            .GetProperties()
+            .First(x => x.Name == propertyName &&
+                        x.CanWrite);
         if (property == null)
         {
             throw new ArgumentException($"Property {propertyName} has no setter", nameof(propertyExpression));
