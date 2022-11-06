@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Local;
-using PersonIdentifiers.Swedish.Options;
+using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;
 
@@ -76,9 +76,9 @@ public abstract class PersonIdentifier :
                 () => NationalReserveNumber.TryParse(value, out var nationalReserveNumber) ? nationalReserveNumber : null,
             };
 
-            if (options.AllowLocal)
+            if (options.LocalReserveNumberPrincipal.HasValue)
             {
-                parsers.Add(() => LocalReserveNumber.TryParse(value, options, out var localReserveNumber) ? localReserveNumber : null);
+                parsers.Add(() => LocalReserveNumber.TryParse(value, options.LocalReserveNumberPrincipal.Value, out var localReserveNumber) ? localReserveNumber : null);
             }
 
             return parsers;
@@ -89,9 +89,9 @@ public abstract class PersonIdentifier :
         obj is PersonIdentifier other &&
         Equals(other);
 
-    public override int GetHashCode() => _value.GetHashCode(StringComparison.Ordinal);
-
     public bool Equals(PersonIdentifier? other) => Value == other?.Value;
+
+    public override int GetHashCode() => _value.GetHashCode(StringComparison.Ordinal);
 
     public override string ToString()
     {

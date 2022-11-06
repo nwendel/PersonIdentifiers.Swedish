@@ -7,6 +7,6 @@ public class RegionSkaneLocalReserveNumbersTheoryData : TheoryData<string, Perso
 {
     public RegionSkaneLocalReserveNumbersTheoryData()
     {
-        Add("810829DA1B", PersonIdentifierKind.LocalReserveNumber, new(1981, 8, 29), PersonIdentifierGender.Male);
+        Add("19810829DA1B", PersonIdentifierKind.LocalReserveNumber, new(1981, 8, 29), PersonIdentifierGender.Male);
     }
 }

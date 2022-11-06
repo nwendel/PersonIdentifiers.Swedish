@@ -1,4 +1,4 @@
-﻿namespace PersonIdentifiers.Swedish;
+﻿namespace PersonIdentifiers.Swedish.Parts;
 
 public class NationalReserveNumberParts : StandardPersonIdentifierParts
 {

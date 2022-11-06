@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PersonIdentifiers.Swedish.Local;
 using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
 using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Conventions;
 using Xunit;
@@ -11,7 +12,7 @@ public class PersonIdentifiersParseConventionTests
 {
     private static readonly IEnumerable<Type> _personIdentifierTypes = typeof(PersonIdentifier).Assembly
         .GetTypes()
-        .Where(x => x.IsAssignableTo(typeof(PersonIdentifier)))
+        .Where(x => x.IsAssignableTo(typeof(PersonIdentifier)) && x != typeof(LocalReserveNumber))
         .ToList();
 
     [Fact]
@@ -23,7 +24,7 @@ public class PersonIdentifiersParseConventionTests
     [Fact]
     public void HasStaticTryParseMethod()
     {
-        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticParseMethod>(_personIdentifierTypes);
+        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticTryParseMethod>(_personIdentifierTypes);
     }
 
     [Fact]

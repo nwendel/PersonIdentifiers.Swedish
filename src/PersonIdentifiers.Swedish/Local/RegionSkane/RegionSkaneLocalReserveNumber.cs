@@ -1,12 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish.Local.RegionSkane;
 
 public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
 {
-    private static readonly Regex _pattern = new(@"^(\d{6}|\d{8})[D|E|F][A-Z][0|1][A-Z]$");
+    private static readonly Regex _pattern = new(@"^(\d{8})[D|E|F][A-Z][0|1][A-Z]$");
 
     private RegionSkaneLocalReserveNumber(string value, PersonIdentifierParts parts)
         : base(value, parts)
@@ -22,10 +23,7 @@ public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
             ? identifier
             : throw new RegionSkaneLocalReserveNumberFormatException();
 
-    public static bool TryParse(string value, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier) =>
-        TryParse(value, RegionSkaneLocalReserveNumberOptions.Default, out identifier);
-
-    public static bool TryParse(string value, RegionSkaneLocalReserveNumberOptions options, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier)
+    public static bool TryParse(string value, [NotNullWhen(true)] out RegionSkaneLocalReserveNumber? identifier)
     {
         GuardAgainst.Null(value);
 
@@ -36,7 +34,7 @@ public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
         }
 
         var parts = new RegionSkaneLocalReserveNumberParts(value);
-        if (!TryGetDateOfBirth(out var dateOfBirth))
+        if (!DateOnlyHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
         {
             return false;
         }
@@ -51,32 +49,7 @@ public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
                 _ => throw new UnreachableCodeException($"Gender part is '{parts.Gender}'"),
             },
         };
+
         return true;
-
-        bool TryGetDateOfBirth([NotNullWhen(true)] out DateOnly? dateOfBirth) => parts.Kind switch
-        {
-            RegionSkaneLocalReserveNumberKind.Short => TryGetDateOfBirthShort(out dateOfBirth),
-            RegionSkaneLocalReserveNumberKind.Long => DateOnlyHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out dateOfBirth),
-        };
-
-        bool TryGetDateOfBirthShort(out DateOnly? dateOfBirth)
-        {
-            // TODO: If guess the century logic is needed elsewhere then refactor this out from here
-            var year = parts.Year + 2000;
-            if (DateOnlyHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth) &&
-                dateOfBirth <= DateOnlyHelper.Today())
-            {
-                return true;
-            }
-
-            year -= 100;
-            if (!DateOnlyHelper.IsValidDate(year, parts.Month, parts.Day, out dateOfBirth))
-            {
-                return false;
-            }
-
-            dateOfBirth = new(year, parts.Month, parts.Day);
-            return true;
-        }
     }
 }
