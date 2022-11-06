@@ -33,11 +33,4 @@ public static class DateOnlyHelper
         date = new(year, month, day);
         return true;
     }
-
-    public static DateOnly Today()
-    {
-        var now = DateTime.Now;
-        var today = DateOnly.FromDateTime(now);
-        return today;
-    }
 }
