@@ -13,8 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="PersonIdentifiers.Swedish.Tests"/>
-    <InternalsVisibleTo Include="PersonIdentifiers.Swedish.Tests.Conventions"/>
+    <InternalsVisibleTo Include="PersonIdentifiers.Swedish.Tests" />
+    <InternalsVisibleTo Include="PersonIdentifiers.Swedish.Tests.Conventions" />
   </ItemGroup>
 
   <ItemGroup>

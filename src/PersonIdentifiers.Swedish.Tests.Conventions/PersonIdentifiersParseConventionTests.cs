@@ -24,7 +24,7 @@ public class PersonIdentifiersParseConventionTests
     [Fact]
     public void HasStaticTryParseMethod()
     {
-        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticParseMethod>(_personIdentifierTypes);
+        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticTryParseMethod>(_personIdentifierTypes);
     }
 
     [Fact]
