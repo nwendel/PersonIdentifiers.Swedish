@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using PersonIdentifiers.Swedish.Internal;
 
-namespace PersonIdentifiers.Swedish;
+namespace PersonIdentifiers.Swedish.Parts;
 
 public class StandardPersonIdentifierParts : PersonIdentifierParts
 {

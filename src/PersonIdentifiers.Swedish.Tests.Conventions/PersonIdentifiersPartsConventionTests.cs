@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PersonIdentifiers.Swedish.Parts;
 using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
 using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Conventions;
 using Xunit;
