@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;
 
