@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace PersonIdentifiers.Swedish.Internal;
 
-public static class GuardAgainst
+internal static class GuardAgainst
 {
     public static void Condition([DoesNotReturnIf(true)] bool condition, string message, string argumentName)
     {
