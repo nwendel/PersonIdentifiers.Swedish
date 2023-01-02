@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Internal;
+﻿namespace ArchUnit.Internal;
 
 public class ConventionContext
 {

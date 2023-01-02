@@ -1,4 +1,4 @@
-﻿namespace PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Internal;
+﻿namespace ArchUnit.Internal;
 
 public interface IInitializeConvention
 {

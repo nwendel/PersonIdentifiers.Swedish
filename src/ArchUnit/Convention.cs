@@ -1,10 +1,9 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using PersonIdentifiers.Swedish.Internal;
-using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Internal;
+using ArchUnit.Infrastructure;
+using ArchUnit.Internal;
 
-namespace PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
+namespace ArchUnit;
 
 public abstract class Convention : IInitializeConvention
 {
@@ -23,7 +22,6 @@ public abstract class Convention : IInitializeConvention
         }
     }
 
-    [SuppressMessage("Design", "CA1033:Interface methods should be callable by child types", Justification = "Method should not be visible on class")]
     void IInitializeConvention.Initialize(ConventionContext context)
     {
         GuardAgainst.Null(context);

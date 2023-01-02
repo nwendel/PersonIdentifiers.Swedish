@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArchUnit;
 using PersonIdentifiers.Swedish.Internal;
-using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions;

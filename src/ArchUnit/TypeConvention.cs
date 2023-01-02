@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
+﻿namespace ArchUnit;
 
 public abstract class TypeConvention : Convention
 {

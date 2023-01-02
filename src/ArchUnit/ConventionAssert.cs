@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using PersonIdentifiers.Swedish.Internal;
-using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Internal;
-using Xunit.Sdk;
+﻿using ArchUnit.Infrastructure;
+using ArchUnit.Internal;
 
-namespace PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
+namespace ArchUnit;
 
 public static class ConventionAssert
 {
@@ -36,7 +32,7 @@ public static class ConventionAssert
             var message = string.Join(Environment.NewLine, messages);
 
             // TODO: Change to ConventionException and figure out how the formatting works
-            throw new XunitException(message);
+            throw new ConventionException(message);
         }
     }
 }
