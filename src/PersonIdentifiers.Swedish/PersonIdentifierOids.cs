@@ -40,12 +40,12 @@ public static class PersonIdentifierOids
             PersonIdentifierKind.PersonalIdentityNumber => PersonalIdentityNumber,
             PersonIdentifierKind.CoordinationNumber => CoordinationNumber,
             PersonIdentifierKind.NationalReserveNumber => NationalReserveNumber,
-            PersonIdentifierKind.LocalReserveNumber => throw new ArgumentException("Cannot get Oid for LocalReserveNumber"),
+            PersonIdentifierKind.LocalReserveNumber => throw new ArgumentException($"Cannot get Oid for LocalReserveNumber, use {nameof(GetLocalReserveNumberOid)}"),
         };
         return oid;
     }
 
-    // TODO: Should constants and this method be in this class?
+    // TODO: Should constants for local reserve numbers and this method be in this class?
     // TODO: How to deal with Sörmland which has two different Oids?
     //       Perhaps this method should return an IEnumerable<string> instead?
     public static string GetLocalReserveNumberOid(LocalReserveNumberPrincipal principal)
