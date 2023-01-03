@@ -21,6 +21,12 @@ public class PersonIdentifiersConventionTests
         ConventionAssert.TypesFollow<PersonIdentifierTypesMustBeAbstractOrSealed>(_personIdentifierTypes);
     }
 
+    [Fact]
+    public void NoPublicConstructor()
+    {
+        ConventionAssert.TypesFollow<PersonIdentifierTypesMustNotHavePublicConstructor>(_personIdentifierTypes);
+    }
+
     private sealed class PersonIdentifierTypesMustBeAbstractOrSealed : TypeConvention
     {
         public override void Assert(Type type)
@@ -33,6 +39,19 @@ public class PersonIdentifiersConventionTests
             }
 
             Fail(type, $"must be abstract or sealed");
+        }
+    }
+
+    private class PersonIdentifierTypesMustNotHavePublicConstructor : TypeConvention
+    {
+        public override void Assert(Type type)
+        {
+            GuardAgainst.Null(type);
+
+            if (type.GetConstructors().Any())
+            {
+                Fail(type, "must not have a public constructor");
+            }
         }
     }
 }
