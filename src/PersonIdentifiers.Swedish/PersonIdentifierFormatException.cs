@@ -8,6 +8,10 @@ public class PersonIdentifierFormatException : FormatException
         : base($"Invalid {personIdentifierType?.Name} format")
     {
         GuardAgainst.Null(personIdentifierType);
+        GuardAgainst.Condition(
+            !personIdentifierType.IsAssignableTo(typeof(PersonIdentifier)),
+            $"{personIdentifierType.FullName} is not assignable to {typeof(PersonIdentifier).FullName}",
+            nameof(personIdentifierType));
 
         PersonIdentifierType = personIdentifierType;
     }
