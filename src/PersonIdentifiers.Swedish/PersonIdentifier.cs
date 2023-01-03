@@ -40,7 +40,7 @@ public abstract class PersonIdentifier :
     public static PersonIdentifier Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new PersonIdentifierFormatException();
+            : throw new PersonIdentifierFormatException(typeof(PersonIdentifier));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {
@@ -68,9 +68,9 @@ public abstract class PersonIdentifier :
         obj is PersonIdentifier other &&
         Equals(other);
 
-    public override int GetHashCode() => _value.GetHashCode(StringComparison.Ordinal);
-
     public bool Equals(PersonIdentifier? other) => Value == other?.Value;
+
+    public override int GetHashCode() => _value.GetHashCode(StringComparison.Ordinal);
 
     public override string ToString()
     {
