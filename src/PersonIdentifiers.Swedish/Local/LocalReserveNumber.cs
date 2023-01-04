@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Local.RegionSkane;
+using PersonIdentifiers.Swedish.Local.RegionStockholm;
 using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish.Local;
@@ -29,7 +30,8 @@ public abstract class LocalReserveNumber : PersonIdentifier
         identifier = principal switch
         {
             LocalReserveNumberPrincipal.RegionSkane => RegionSkaneLocalReserveNumber.TryParse(value, out var localReserveNumer) ? localReserveNumer : null,
-            _ => throw new NotImplementedException($"LocalReserveNumberPrincipal {principal} is not yet supported"),
+            LocalReserveNumberPrincipal.RegionStockholm => RegionStockholmLocalReserveNumber.TryParse(value, out var localReserveNumber) ? localReserveNumber : null,
+            _ => throw new NotImplementedException($"LocalReserveNumberPrincipal {principal} is not supported yet"),
         };
 
         return identifier != null;

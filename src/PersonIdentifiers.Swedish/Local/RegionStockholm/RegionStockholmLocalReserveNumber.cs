@@ -21,7 +21,7 @@ public sealed class RegionStockholmLocalReserveNumber : LocalReserveNumber
     public static new RegionStockholmLocalReserveNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new RegionStockholmLocalReserveNumberFormatException();
+            : throw new PersonIdentifierFormatException(typeof(RegionStockholmLocalReserveNumber));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out RegionStockholmLocalReserveNumber? identifier)
     {
