@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Parts;
 
-namespace PersonIdentifiers.Swedish.Local.RegionStockholm;
+namespace PersonIdentifiers.Swedish.LocalReserveNumbers.RegionStockholm;
 
 public sealed class RegionStockholmLocalReserveNumber : LocalReserveNumber
 {
