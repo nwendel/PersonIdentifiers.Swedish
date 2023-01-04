@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Parts;
 
-namespace PersonIdentifiers.Swedish.Local.RegionSkane;
+namespace PersonIdentifiers.Swedish.LocalReserveNumbers.RegionSkane;
 
 public sealed class RegionSkaneLocalReserveNumber : LocalReserveNumber
 {

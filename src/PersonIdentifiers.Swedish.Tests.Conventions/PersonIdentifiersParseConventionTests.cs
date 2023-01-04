@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ArchUnit;
 using ArchUnit.Rules;
-using PersonIdentifiers.Swedish.Local;
+using PersonIdentifiers.Swedish.LocalReserveNumbers;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions;

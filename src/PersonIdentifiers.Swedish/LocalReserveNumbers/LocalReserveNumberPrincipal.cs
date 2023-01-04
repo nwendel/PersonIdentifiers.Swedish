@@ -1,4 +1,4 @@
-﻿namespace PersonIdentifiers.Swedish.Local;
+﻿namespace PersonIdentifiers.Swedish.LocalReserveNumbers;
 
 public enum LocalReserveNumberPrincipal
 {
