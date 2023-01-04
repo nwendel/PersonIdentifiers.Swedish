@@ -1,6 +1,5 @@
 ﻿namespace ArchUnit.Internal;
 
-// TODO: Better naming?
 public class TypeConventionAction : ITypeConvention
 {
     private readonly Action<Type, ConventionContext> action;

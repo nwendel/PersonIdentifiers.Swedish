@@ -7,7 +7,7 @@ public static class ConventionAssert
 {
     public static void TypesFollow(IEnumerable<Type> types, Action<Type, ConventionContext> assertAction)
     {
-        var convention = new ActionTypeConvention(assertAction);
+        var convention = new TypeConventionAction(assertAction);
         TypesFollow(types, convention);
     }
 
