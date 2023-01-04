@@ -4,6 +4,7 @@ using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;
 
+[SuppressMessage("Major Code Smell", "S4035:Classes implementing \"IEquatable<T>\" should be sealed", Justification = "This class is only implemented by sealed or abstract clasesses")]
 public abstract class PersonIdentifier :
     IPersonIdentifierPartsAware<PersonIdentifierParts>,
     IEquatable<PersonIdentifier>
