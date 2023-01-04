@@ -1,13 +1,16 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;
 
 // https://confluence.cgiostersund.se/display/PU/Nationellt+Reservid
+[SuppressMessage("Design", "CA1067:Override Object.Equals(object) when implementing IEquatable<T>", Justification = "Not needed, overriden correctly in PersonIdentifier")]
 public sealed class NationalReserveNumber :
     PersonIdentifier,
-    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
+    IPersonIdentifierPartsAware<NationalReserveNumberParts>,
+    IEquatable<NationalReserveNumber>
 {
     private static readonly Regex _pattern = new(@"^([0-9]{8})((?![IOQVW])[A-Z]{2}[0-9]{2}|(?![IOQVW])[A-Z]{3}[0-9]{1})$");
 
@@ -22,12 +25,12 @@ public sealed class NationalReserveNumber :
 
     public override string Oid => PersonIdentifierOids.NationalReserveNumber;
 
-    public override StandardPersonIdentifierParts Parts => (StandardPersonIdentifierParts)base.Parts;
+    public override NationalReserveNumberParts Parts => (NationalReserveNumberParts)base.Parts;
 
     public static new NationalReserveNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new NationalReserveNumberFormatException();
+            : throw new PersonIdentifierFormatException(typeof(NationalReserveNumber));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out NationalReserveNumber? identifier)
     {
@@ -114,4 +117,6 @@ public sealed class NationalReserveNumber :
                 : PersonIdentifierGender.Female;
         }
     }
+
+    public bool Equals(NationalReserveNumber? other) => Value == other?.Value;
 }

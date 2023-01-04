@@ -1,9 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;
 
-public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdentifierParts>
+public abstract class PersonIdentifier :
+    IPersonIdentifierPartsAware<PersonIdentifierParts>,
+    IEquatable<PersonIdentifier>
 {
     private readonly string _value;
 
@@ -37,7 +40,7 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
     public static PersonIdentifier Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new PersonIdentifierFormatException();
+            : throw new PersonIdentifierFormatException(typeof(PersonIdentifier));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier)
     {
@@ -60,6 +63,14 @@ public abstract class PersonIdentifier : IPersonIdentifierPartsAware<PersonIdent
         identifier = default;
         return false;
     }
+
+    public override bool Equals(object? obj) =>
+        obj is PersonIdentifier other &&
+        Equals(other);
+
+    public bool Equals(PersonIdentifier? other) => Value == other?.Value;
+
+    public override int GetHashCode() => _value.GetHashCode(StringComparison.Ordinal);
 
     public override string ToString()
     {

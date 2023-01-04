@@ -2,7 +2,7 @@
 
 public static class Blacklists
 {
-    public static readonly IReadOnlyCollection<string> Transportstyrelsen = new HashSet<string>
+    public static readonly IReadOnlySet<string> Transportstyrelsen = new HashSet<string>
     {
         "APA", "ARG", "ASS", "BAJ", "BSS", "CUC", "CUK", "DUM", "ETA",
         "ETT", "FAG", "FAN", "FEG", "FEL", "FEM", "FES", "FET", "FNL",

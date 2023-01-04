@@ -16,7 +16,9 @@ public class PersonIdentifierParseTests
         {
             Assert.Equal(value, identifier.Value);
             Assert.Equal(kind, identifier.Kind);
+            Assert.Equal(dateOfBirth.HasValue, identifier.IsDateOfBirthKnown);
             Assert.Equal(dateOfBirth, identifier.DateOfBirth);
+            Assert.Equal(gender.HasValue, identifier.IsGenderKnown);
             Assert.Equal(gender, identifier.Gender);
         }
         else
@@ -42,13 +44,16 @@ public class PersonIdentifierParseTests
 
         Assert.Equal(value, identifier.Value);
         Assert.Equal(kind, identifier.Kind);
+        Assert.Equal(dateOfBirth.HasValue, identifier.IsDateOfBirthKnown);
         Assert.Equal(dateOfBirth, identifier.DateOfBirth);
+        Assert.Equal(gender.HasValue, identifier.IsGenderKnown);
         Assert.Equal(gender, identifier.Gender);
     }
 
     [Fact]
     public void ThrowsOnParseInvalidFormat()
     {
-        Assert.Throws<PersonIdentifierFormatException>(() => PersonIdentifier.Parse("ASDF"));
+        var ex = Assert.Throws<PersonIdentifierFormatException>(() => PersonIdentifier.Parse("ASDF"));
+        Assert.Equal(typeof(PersonIdentifier), ex.PersonIdentifierType);
     }
 }

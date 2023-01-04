@@ -7,7 +7,7 @@ using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions;
 
-public class PersonIdentifiersParseConventionTests
+public class PersonIdentifiersConventionTests
 {
     private static readonly IEnumerable<Type> _personIdentifierTypes =
         typeof(PersonIdentifier).Assembly
@@ -16,14 +16,14 @@ public class PersonIdentifiersParseConventionTests
         .ToList();
 
     [Fact]
-    public void HasPublicStaticParseMethod()
+    public void IsSealedOrAbstract()
     {
-        ConventionAssert.TypesFollow<HasPublicStaticParseMethod>(_personIdentifierTypes);
+        ConventionAssert.TypesFollow<IsAbstractOrSealed>(_personIdentifierTypes);
     }
 
     [Fact]
-    public void HasStaticTryParseMethod()
+    public void NoPublicConstructor()
     {
-        ConventionAssert.TypesFollow<HasPublicStaticTryParseMethod>(_personIdentifierTypes);
+        ConventionAssert.TypesFollow<NoPublicConstructors>(_personIdentifierTypes);
     }
 }
