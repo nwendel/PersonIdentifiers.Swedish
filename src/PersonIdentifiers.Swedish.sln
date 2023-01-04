@@ -18,7 +18,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.Tests.Conventions", "PersonIdentifiers.Swedish.Tests.Conventions\PersonIdentifiers.Swedish.Tests.Conventions.csproj", "{C7A6C254-4D0A-4DFE-AF5F-BBC83B84F85F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchUnit", "ArchUnit\ArchUnit.csproj", "{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchUnit", "ArchUnit\ArchUnit.csproj", "{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.Builder", "PersonIdentifiers.Swedish.Builder\PersonIdentifiers.Swedish.Builder.csproj", "{51ACE47E-D80C-49B6-B982-4FBB56EB54BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51ACE47E-D80C-49B6-B982-4FBB56EB54BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51ACE47E-D80C-49B6-B982-4FBB56EB54BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51ACE47E-D80C-49B6-B982-4FBB56EB54BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51ACE47E-D80C-49B6-B982-4FBB56EB54BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
