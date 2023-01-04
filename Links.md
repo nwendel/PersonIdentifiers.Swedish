@@ -7,3 +7,7 @@ https://www.transportstyrelsen.se/sv/vagtrafik/Fordon/Om-registreringsskylt/Byte
 https://confluence.cgiostersund.se/display/PU/Identitetsformat
 https://confluence.cgiostersund.se/display/PU/Nationellt+Reservid
 https://confluence.cgiostersund.se/display/PU/Lokala+Reservidn
+
+https://github.com/personnummer/csharp
+https://github.com/wallymathieu/swe-id-num
+https://github.com/tbillas/SwedishIdentifier
