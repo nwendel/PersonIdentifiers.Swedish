@@ -53,6 +53,7 @@ public class PersonIdentifierParseTests
     [Fact]
     public void ThrowsOnParseInvalidFormat()
     {
-        Assert.Throws<PersonIdentifierFormatException>(() => PersonIdentifier.Parse("ASDF"));
+        var ex = Assert.Throws<PersonIdentifierFormatException>(() => PersonIdentifier.Parse("ASDF"));
+        Assert.Equal(typeof(PersonIdentifier), ex.PersonIdentifierType);
     }
 }

@@ -25,6 +25,8 @@ charset = utf-8-bom
 [*.{cs,vb}]
 # Organize usings
 dotnet_sort_system_directives_first = true
+# Namespaces
+csharp_style_namespace_declarations = file_scoped:silent
 # this. preferences
 dotnet_style_qualification_for_field = false:silent
 dotnet_style_qualification_for_property = false:silent
@@ -154,3 +156,7 @@ dotnet_diagnostic.IDE0062.severity = error
 
 # IDE0090: Use 'new(...)'
 dotnet_diagnostic.IDE0090.severity = error
+
+# S3925: "ISerializable" should be implemented correctly
+dotnet_diagnostic.S3925.severity = none
+

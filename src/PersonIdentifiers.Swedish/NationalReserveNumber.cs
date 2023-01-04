@@ -30,7 +30,7 @@ public sealed class NationalReserveNumber :
     public static new NationalReserveNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new NationalReserveNumberFormatException();
+            : throw new PersonIdentifierFormatException(typeof(NationalReserveNumber));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out NationalReserveNumber? identifier)
     {

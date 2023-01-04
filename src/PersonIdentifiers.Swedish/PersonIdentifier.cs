@@ -44,7 +44,7 @@ public abstract class PersonIdentifier :
     public static PersonIdentifier Parse(string value, PersonIdentifierParseOptions options) =>
         TryParse(value, options, out var identifier)
             ? identifier
-            : throw new PersonIdentifierFormatException();
+            : throw new PersonIdentifierFormatException(typeof(PersonIdentifier));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonIdentifier? identifier) =>
         TryParse(value, PersonIdentifierParseOptions.Default, out identifier);
