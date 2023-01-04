@@ -67,6 +67,7 @@ public class CoordinationNumberParseTests
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Common test data for multiple tests")]
     public void ThrowsOnParseInvalid(string value, PersonIdentifierKind kind, DateOnly? dateOfBirth, PersonIdentifierGender? gender)
     {
-        Assert.Throws<CoordinationNumberFormatException>(() => _ = CoordinationNumber.Parse(value));
+        var ex = Assert.Throws<PersonIdentifierFormatException>(() => _ = CoordinationNumber.Parse(value));
+        Assert.Equal(typeof(CoordinationNumber), ex.PersonIdentifierType);
     }
 }

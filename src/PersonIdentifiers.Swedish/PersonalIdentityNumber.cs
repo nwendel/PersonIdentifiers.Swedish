@@ -40,7 +40,7 @@ public sealed class PersonalIdentityNumber :
     public static new PersonalIdentityNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new PersonalIdentityNumberFormatException();
+            : throw new PersonIdentifierFormatException(typeof(PersonalIdentityNumber));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out PersonalIdentityNumber? identifier)
     {

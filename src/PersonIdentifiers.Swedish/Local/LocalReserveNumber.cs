@@ -19,7 +19,7 @@ public abstract class LocalReserveNumber : PersonIdentifier
     public static LocalReserveNumber Parse(string value, LocalReserveNumberPrincipal principal) =>
         TryParse(value, principal, out var identifier)
             ? identifier
-            : throw new PersonIdentifierFormatException();
+            : throw new PersonIdentifierFormatException(typeof(LocalReserveNumber));
 
     public static bool TryParse(string value, LocalReserveNumberPrincipal principal, [NotNullWhen(true)] out LocalReserveNumber? identifier)
     {

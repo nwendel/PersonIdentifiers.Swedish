@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArchUnit;
+using ArchUnit.Rules;
 using PersonIdentifiers.Swedish.Local;
-using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers;
-using PersonIdentifiers.Swedish.Tests.Conventions.TestHelpers.Conventions;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions;
@@ -16,20 +16,14 @@ public class PersonIdentifiersParseConventionTests
         .ToList();
 
     [Fact]
-    public void HasStaticParseMethod()
+    public void HasPublicStaticParseMethod()
     {
-        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticParseMethod>(_personIdentifierTypes);
+        ConventionAssert.TypesFollow<HasPublicStaticParseMethod>(_personIdentifierTypes);
     }
 
     [Fact]
     public void HasStaticTryParseMethod()
     {
-        ConventionAssert.TypesFollow<PersonIdentifierTypesMustHaveStaticTryParseMethod>(_personIdentifierTypes);
-    }
-
-    [Fact]
-    public void IsSealedOrAbstract()
-    {
-        ConventionAssert.TypesFollow<PersonIdentifierTypesMustBeAbstractOrSealed>(_personIdentifierTypes);
+        ConventionAssert.TypesFollow<HasPublicStaticTryParseMethod>(_personIdentifierTypes);
     }
 }

@@ -67,6 +67,7 @@ public class PersonalIdentityNumberParseTests
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Common test data for multiple tests")]
     public void ThrowsOnParseInvalid(string value, PersonIdentifierKind kind, DateOnly? dateOfBirth, PersonIdentifierGender? gender)
     {
-        Assert.Throws<PersonalIdentityNumberFormatException>(() => _ = PersonalIdentityNumber.Parse(value));
+        var ex = Assert.Throws<PersonIdentifierFormatException>(() => _ = PersonalIdentityNumber.Parse(value));
+        Assert.Equal(typeof(PersonalIdentityNumber), ex.PersonIdentifierType);
     }
 }

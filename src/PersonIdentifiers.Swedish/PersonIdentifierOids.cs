@@ -21,6 +21,10 @@ public static class PersonIdentifierOids
 
     public const string LocalReserveNumberRegionSkane = "1.2.752.74.9.4";
 
+    public const string LocalReserveNumberRegionSormland1 = "1.2.752.266.1.1.1";
+
+    public const string LocalReserveNumberRegionSormland2 = "1.2.752.266.1.1.2";
+
     public const string LocalReserveNumberRegionStockholm = "1.2.752.97.3.1.3";
 
     public const string LocalReserveNumberRegionVasternorrland = "1.2.752.269.1.1";
@@ -36,12 +40,14 @@ public static class PersonIdentifierOids
             PersonIdentifierKind.PersonalIdentityNumber => PersonalIdentityNumber,
             PersonIdentifierKind.CoordinationNumber => CoordinationNumber,
             PersonIdentifierKind.NationalReserveNumber => NationalReserveNumber,
-            PersonIdentifierKind.LocalReserveNumber => throw new ArgumentException("Cannot get Oid for LocalReserveNumber"),
+            PersonIdentifierKind.LocalReserveNumber => throw new ArgumentException($"Cannot get Oid for LocalReserveNumber, use {nameof(GetLocalReserveNumberOid)}"),
         };
         return oid;
     }
 
-    // TODO: Should constants and this method be in this class?
+    // TODO: Should constants for local reserve numbers and this method be in this class?
+    // TODO: How to deal with Sörmland which has two different Oids?
+    //       Perhaps this method should return an IEnumerable<string> instead?
     public static string GetLocalReserveNumberOid(LocalReserveNumberPrincipal principal)
     {
         GuardAgainst.Undefined(principal);
@@ -53,10 +59,12 @@ public static class PersonIdentifierOids
             LocalReserveNumberPrincipal.RegionBlekinge => LocalReserveNumberRegionBlekinge,
             LocalReserveNumberPrincipal.RegionOrebroLan => LocalReserveNumberRegionOrebroLan,
             LocalReserveNumberPrincipal.RegionSkane => LocalReserveNumberRegionSkane,
+            LocalReserveNumberPrincipal.RegionSormland => throw new NotImplementedException("There are two what to do here?"),
             LocalReserveNumberPrincipal.RegionStockholm => LocalReserveNumberRegionStockholm,
             LocalReserveNumberPrincipal.RegionVasternorrland => LocalReserveNumberRegionVasternorrland,
             LocalReserveNumberPrincipal.VastraGotalandsregionen => LocalReserveNumberVastraGotalandsregionen,
         };
+
         return oid;
     }
 }

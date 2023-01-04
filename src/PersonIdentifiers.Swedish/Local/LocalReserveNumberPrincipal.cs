@@ -7,6 +7,7 @@ public enum LocalReserveNumberPrincipal
     RegionBlekinge,
     RegionOrebroLan,
     RegionSkane,
+    RegionSormland,
     RegionStockholm,
     RegionVasternorrland,
     VastraGotalandsregionen,
