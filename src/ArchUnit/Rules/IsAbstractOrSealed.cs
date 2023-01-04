@@ -7,6 +7,7 @@ public class IsAbstractOrSealed : ITypeConvention
     public void Assert(Type type, ConventionContext context)
     {
         GuardAgainst.Null(type);
+        GuardAgainst.Null(context);
 
         if (type.IsAbstract || type.IsSealed)
         {
