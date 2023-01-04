@@ -9,7 +9,7 @@ public static class DateOnlyHelper
     private static readonly int _minYear = _calendar.MinSupportedDateTime.Year;
     private static readonly int _maxYear = _calendar.MaxSupportedDateTime.Year;
 
-    public static bool IsValidDate(int year, int month, int day, [NotNullWhen(true)] out DateOnly? date)
+    public static bool TryParse(int year, int month, int day, [NotNullWhen(true)] out DateOnly? date)
     {
         date = default;
 
