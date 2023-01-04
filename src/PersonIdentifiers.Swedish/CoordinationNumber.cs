@@ -54,7 +54,7 @@ public sealed class CoordinationNumber :
         var parts = new StandardPersonIdentifierParts(value);
         var day = parts.Day - 60;
 
-        if (!DateOnlyHelper.IsValidDate(parts.Year, parts.Month, day, out var dateOfBirth))
+        if (!DateOnlyHelper.TryParse(parts.Year, parts.Month, day, out var dateOfBirth))
         {
             return false;
         }

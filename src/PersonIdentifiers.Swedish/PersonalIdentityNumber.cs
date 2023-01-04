@@ -52,7 +52,7 @@ public sealed class PersonalIdentityNumber :
         }
 
         var parts = new StandardPersonIdentifierParts(value);
-        if (!DateOnlyHelper.IsValidDate(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
+        if (!DateOnlyHelper.TryParse(parts.Year, parts.Month, parts.Day, out var dateOfBirth))
         {
             return false;
         }

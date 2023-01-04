@@ -6,21 +6,21 @@ namespace PersonIdentifiers.Swedish.Tests.Internal
     public class DateOnlyHelperTests
     {
         [Fact]
-        public void CanIsValidFalseWrongYear()
+        public void CanTryParseFalseWrongYear()
         {
-            Assert.False(DateOnlyHelper.IsValidDate(-1, 1, 1, out var _));
+            Assert.False(DateOnlyHelper.TryParse(-1, 1, 1, out var _));
         }
 
         [Fact]
-        public void CanIsValidFalseWrongMonth()
+        public void CanTryParseFalseWrongMonth()
         {
-            Assert.False(DateOnlyHelper.IsValidDate(2022, 0, 1, out var _));
+            Assert.False(DateOnlyHelper.TryParse(2022, 0, 1, out var _));
         }
 
         [Fact]
-        public void CanIsValidFalseWrongDay()
+        public void CanTryParseFalseWrongDay()
         {
-            Assert.False(DateOnlyHelper.IsValidDate(2022, 1, 0, out var _));
+            Assert.False(DateOnlyHelper.TryParse(2022, 1, 0, out var _));
         }
     }
 }

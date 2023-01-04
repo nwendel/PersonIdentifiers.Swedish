@@ -95,7 +95,7 @@ public sealed class NationalReserveNumber :
                 year -= 300;
             }
 
-            if (!DateOnlyHelper.IsValidDate(year, month, day, out dateOfBirth))
+            if (!DateOnlyHelper.TryParse(year, month, day, out dateOfBirth))
             {
                 return false;
             }
