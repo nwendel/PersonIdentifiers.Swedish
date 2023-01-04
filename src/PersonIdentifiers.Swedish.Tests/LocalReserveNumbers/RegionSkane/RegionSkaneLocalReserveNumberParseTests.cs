@@ -1,9 +1,9 @@
 ﻿using System;
-using PersonIdentifiers.Swedish.Local.RegionSkane;
+using PersonIdentifiers.Swedish.LocalReserveNumbers.RegionSkane;
 using PersonIdentifiers.Swedish.Tests.TestData;
 using Xunit;
 
-namespace PersonIdentifiers.Swedish.Tests.Local.RegionSkane;
+namespace PersonIdentifiers.Swedish.Tests.LocalReserveNumbers.RegionSkane;
 
 public class RegionSkaneLocalReserveNumberParseTests
 {

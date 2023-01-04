@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using PersonIdentifiers.Swedish.Internal;
-using PersonIdentifiers.Swedish.Local;
+using PersonIdentifiers.Swedish.LocalReserveNumbers;
 using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;

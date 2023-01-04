@@ -1,5 +1,5 @@
 ﻿using PersonIdentifiers.Swedish.Internal;
-using PersonIdentifiers.Swedish.Local;
+using PersonIdentifiers.Swedish.LocalReserveNumbers;
 
 namespace PersonIdentifiers.Swedish;
 

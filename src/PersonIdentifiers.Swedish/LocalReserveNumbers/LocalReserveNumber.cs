@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using PersonIdentifiers.Swedish.Internal;
-using PersonIdentifiers.Swedish.Local.RegionSkane;
+using PersonIdentifiers.Swedish.LocalReserveNumbers.RegionSkane;
 using PersonIdentifiers.Swedish.Parts;
 
-namespace PersonIdentifiers.Swedish.Local;
+namespace PersonIdentifiers.Swedish.LocalReserveNumbers;
 
 public abstract class LocalReserveNumber : PersonIdentifier
 {

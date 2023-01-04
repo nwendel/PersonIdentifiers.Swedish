@@ -2,7 +2,7 @@
 using PersonIdentifiers.Swedish.Internal;
 using PersonIdentifiers.Swedish.Parts;
 
-namespace PersonIdentifiers.Swedish.Local.RegionSkane;
+namespace PersonIdentifiers.Swedish.LocalReserveNumbers.RegionSkane;
 
 public class RegionSkaneLocalReserveNumberParts : PersonIdentifierParts
 {
