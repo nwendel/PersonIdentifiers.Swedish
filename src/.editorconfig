@@ -160,3 +160,6 @@ dotnet_diagnostic.IDE0090.severity = error
 # S3925: "ISerializable" should be implemented correctly
 dotnet_diagnostic.S3925.severity = none
 
+
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none

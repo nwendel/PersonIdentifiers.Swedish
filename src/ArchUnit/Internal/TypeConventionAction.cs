@@ -2,15 +2,15 @@
 
 public class TypeConventionAction : ITypeConvention
 {
-    private readonly Action<Type, ConventionContext> action;
+    private readonly Action<Type, ConventionContext> _action;
 
     public TypeConventionAction(Action<Type, ConventionContext> action)
     {
-        this.action = action;
+        _action = action;
     }
 
-    public void Assert(Type item, ConventionContext context)
+    public void Assert(Type type, ConventionContext context)
     {
-        action(item, context);
+        _action(type, context);
     }
 }

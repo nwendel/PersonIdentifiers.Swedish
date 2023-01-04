@@ -1,4 +1,6 @@
-﻿namespace ArchUnit.Rules;
+﻿using ArchUnit.Infrastructure;
+
+namespace ArchUnit.Rules;
 
 public class HasPublicStaticTryParseMethod : ITypeConvention
 {
@@ -6,6 +8,9 @@ public class HasPublicStaticTryParseMethod : ITypeConvention
 
     public void Assert(Type type, ConventionContext context)
     {
+        GuardAgainst.Null(type);
+        GuardAgainst.Null(context);
+
         var method = type.GetMethod(_methodName, System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static, new[] { typeof(string), type.MakeByRefType() });
         if (method == null || method.ReturnType != typeof(bool))
         {

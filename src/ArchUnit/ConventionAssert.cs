@@ -23,6 +23,7 @@ public static class ConventionAssert
     public static void TypesFollow(IEnumerable<Type> types, ITypeConvention convention)
     {
         GuardAgainst.Null(types);
+        GuardAgainst.Null(convention);
 
         var context = new ConventionContext();
         foreach (var type in types)
