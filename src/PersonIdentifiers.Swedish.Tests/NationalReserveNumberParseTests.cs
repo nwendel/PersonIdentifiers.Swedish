@@ -14,7 +14,9 @@ public class NationalReserveNumberParseTests
         {
             Assert.Equal(value, identifier.Value);
             Assert.Equal(kind, identifier.Kind);
+            Assert.Equal(dateOfBirth.HasValue, identifier.IsDateOfBirthKnown);
             Assert.Equal(dateOfBirth, identifier.DateOfBirth);
+            Assert.Equal(gender.HasValue, identifier.IsGenderKnown);
             Assert.Equal(gender, identifier.Gender);
         }
         else
@@ -51,7 +53,9 @@ public class NationalReserveNumberParseTests
 
         Assert.Equal(value, identifier.Value);
         Assert.Equal(kind, identifier.Kind);
+        Assert.Equal(dateOfBirth.HasValue, identifier.IsDateOfBirthKnown);
         Assert.Equal(dateOfBirth, identifier.DateOfBirth);
+        Assert.Equal(gender.HasValue, identifier.IsGenderKnown);
         Assert.Equal(gender, identifier.Gender);
     }
 
@@ -63,6 +67,7 @@ public class NationalReserveNumberParseTests
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "Common test data for multiple tests")]
     public void ThrowsOnParseInvalid(string value, PersonIdentifierKind kind, DateOnly? dateOfBirth, PersonIdentifierGender? gender)
     {
-        Assert.Throws<NationalReserveNumberFormatException>(() => _ = NationalReserveNumber.Parse(value));
+        var ex = Assert.Throws<PersonIdentifierFormatException>(() => _ = NationalReserveNumber.Parse(value));
+        Assert.Equal(typeof(NationalReserveNumber), ex.PersonIdentifierType);
     }
 }

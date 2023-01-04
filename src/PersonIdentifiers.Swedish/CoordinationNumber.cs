@@ -1,12 +1,15 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using PersonIdentifiers.Swedish.Internal;
+using PersonIdentifiers.Swedish.Parts;
 
 namespace PersonIdentifiers.Swedish;
 
+[SuppressMessage("Design", "CA1067:Override Object.Equals(object) when implementing IEquatable<T>", Justification = "Not needed, overriden correctly in PersonIdentifier")]
 public sealed class CoordinationNumber :
     PersonIdentifier,
-    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>
+    IPersonIdentifierPartsAware<StandardPersonIdentifierParts>,
+    IEquatable<CoordinationNumber>
 {
     private static readonly Regex _pattern = new(@"^(\d{2})(\d{2})(\d{2})(([6-9]){1})(\d{1})(([0-9]){4})$");
 
@@ -36,7 +39,7 @@ public sealed class CoordinationNumber :
     public static new CoordinationNumber Parse(string value) =>
         TryParse(value, out var identifier)
             ? identifier
-            : throw new CoordinationNumberFormatException();
+            : throw new PersonIdentifierFormatException(typeof(CoordinationNumber));
 
     public static bool TryParse(string value, [NotNullWhen(true)] out CoordinationNumber? identifier)
     {
@@ -72,4 +75,6 @@ public sealed class CoordinationNumber :
                 : PersonIdentifierGender.Female;
         }
     }
+
+    public bool Equals(CoordinationNumber? other) => Value == other?.Value;
 }

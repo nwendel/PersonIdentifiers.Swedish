@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace PersonIdentifiers.Swedish.Internal;
+namespace ArchUnit.Infrastructure;
 
 internal static class GuardAgainst
 {

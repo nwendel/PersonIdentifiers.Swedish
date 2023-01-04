@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace PersonIdentifiers.Swedish;
+namespace PersonIdentifiers.Swedish.Parts;
 
 public abstract class PersonIdentifierParts : IEnumerable<(string Name, object Value)>
 {
