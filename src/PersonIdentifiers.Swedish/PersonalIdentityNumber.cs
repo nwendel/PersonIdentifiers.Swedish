@@ -6,7 +6,7 @@ using PersonIdentifiers.Swedish.Parts;
 namespace PersonIdentifiers.Swedish;
 
 [SuppressMessage("Design", "CA1067:Override Object.Equals(object) when implementing IEquatable<T>", Justification = "Not needed, overriden correctly in PersonIdentifier")]
-public sealed class PersonalIdentityNumber :
+public class PersonalIdentityNumber :
     PersonIdentifier,
     IPersonIdentifierPartsAware<StandardPersonIdentifierParts>,
     IEquatable<PersonalIdentityNumber>

@@ -43,8 +43,7 @@ public static class ConventionAssert
         {
             var message = string.Join(Environment.NewLine, messages);
 
-            // TODO: Change to ConventionException and figure out how the formatting works
-            throw new ConventionException(message);
+            TestFramework.Throw(message);
         }
     }
 }

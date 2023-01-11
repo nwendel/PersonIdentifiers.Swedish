@@ -1,4 +1,4 @@
-﻿namespace ArchUnit.Internal;
+﻿namespace ArchUnit.Infrastructure.TestFrameworks;
 
 // TODO: XUnit reporter will include full type name in message
 //       So initialize message with a newline so that error message is written first on the next line
