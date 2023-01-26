@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using ArchUnit.Infrastructure;
-using ArchUnit.Internal;
+using ConventionAsserts.Infrastructure;
+using ConventionAsserts.Internal;
 
-namespace ArchUnit;
+namespace ConventionAsserts;
 
 public class ConventionContext
 {

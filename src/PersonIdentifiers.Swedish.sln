@@ -20,7 +20,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.T
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonIdentifiers.Swedish.Tests.Conventions", "PersonIdentifiers.Swedish.Tests.Conventions\PersonIdentifiers.Swedish.Tests.Conventions.csproj", "{C7A6C254-4D0A-4DFE-AF5F-BBC83B84F85F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchUnit", "ArchUnit\ArchUnit.csproj", "{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConventionAsserts", "ConventionAsserts\ConventionAsserts.csproj", "{B6555FFD-D5F6-4E3F-81E8-DB9A072B585C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

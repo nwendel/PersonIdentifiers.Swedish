@@ -1,4 +1,4 @@
-﻿namespace ArchUnit;
+﻿namespace ConventionAsserts;
 
 public interface ITypeConvention
 {

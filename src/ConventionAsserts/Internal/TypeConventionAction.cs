@@ -1,4 +1,4 @@
-﻿namespace ArchUnit.Internal;
+﻿namespace ConventionAsserts.Internal;
 
 public class TypeConventionAction : ITypeConvention
 {

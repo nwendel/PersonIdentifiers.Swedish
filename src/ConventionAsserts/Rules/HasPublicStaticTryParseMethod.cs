@@ -1,6 +1,6 @@
-﻿using ArchUnit.Infrastructure;
+﻿using ConventionAsserts.Infrastructure;
 
-namespace ArchUnit.Rules;
+namespace ConventionAsserts.Rules;
 
 public class HasPublicStaticTryParseMethod : ITypeConvention
 {

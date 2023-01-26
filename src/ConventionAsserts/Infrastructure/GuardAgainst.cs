@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-namespace ArchUnit.Infrastructure;
+namespace ConventionAsserts.Infrastructure;
 
 internal static class GuardAgainst
 {

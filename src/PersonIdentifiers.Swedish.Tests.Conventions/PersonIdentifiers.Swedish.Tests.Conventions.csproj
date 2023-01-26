@@ -31,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ArchUnit\ArchUnit.csproj" />
+    <ProjectReference Include="..\ConventionAsserts\ConventionAsserts.csproj" />
     <ProjectReference Include="..\PersonIdentifiers.Swedish\PersonIdentifiers.Swedish.csproj" />
   </ItemGroup>
 

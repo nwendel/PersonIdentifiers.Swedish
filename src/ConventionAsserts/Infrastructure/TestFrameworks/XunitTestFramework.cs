@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace ArchUnit.Infrastructure.TestFrameworks;
+namespace ConventionAsserts.Infrastructure.TestFrameworks;
 
 internal class XunitTestFramework : ITestFramework
 {

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using ArchUnit.Infrastructure.TestFrameworks;
+using ConventionAsserts.Infrastructure.TestFrameworks;
 
-namespace ArchUnit.Infrastructure;
+namespace ConventionAsserts.Infrastructure;
 
 internal static class TestFramework
 {

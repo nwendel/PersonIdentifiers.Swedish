@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace ArchUnit.Infrastructure;
+namespace ConventionAsserts.Infrastructure;
 
 internal interface ITestFramework
 {

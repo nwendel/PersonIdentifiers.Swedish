@@ -1,4 +1,4 @@
-﻿namespace ArchUnit.Infrastructure.TestFrameworks;
+﻿namespace ConventionAsserts.Infrastructure.TestFrameworks;
 
 public class ConventionException : Exception
 {

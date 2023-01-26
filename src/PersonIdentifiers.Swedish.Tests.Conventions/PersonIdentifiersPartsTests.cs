@@ -1,27 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ArchUnit;
+using ConventionAsserts;
 using PersonIdentifiers.Swedish.Parts;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions;
 
-public class PersonIdentifiersPartsConventionTests
+public class PersonIdentifiersPartsTests
 {
-    private static readonly IEnumerable<Type> _personIdentifierPartsTypes =
-        typeof(PersonIdentifierParts).Assembly
-        .GetTypes()
-        .Where(x => x.IsAssignableTo(typeof(PersonIdentifierParts)) &&
-                    !x.IsAbstract)
-        .ToList();
+    private static readonly ConventionTypeSource _typeSource = Convention
+        .ForTypes(x => x
+            .FromAssemblyContaining<PersonIdentifierParts>()
+            .Where(t => t.AssignableTo<PersonIdentifierParts>() &&
+                        !t.Type.IsAbstract));
 
     [Fact]
     public void CanEnumerateParts()
     {
-        ConventionAssert.TypesFollow(
-            _personIdentifierPartsTypes,
-            (type, context) =>
+        Convention.ForTypes(
+            _typeSource,
+            x => x.Assert((type, context) =>
             {
                 var instance = (IEnumerable<(string Name, object Value)>?)Activator.CreateInstance(type, "191212121212");
                 if (instance == null)
@@ -51,6 +50,6 @@ public class PersonIdentifiersPartsConventionTests
                         context.Fail(type, $"must return {propertyName} in correct sequence when enumerating");
                     }
                 }
-            });
+            }));
     }
 }

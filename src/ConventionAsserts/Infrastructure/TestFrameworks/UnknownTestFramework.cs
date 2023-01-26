@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace ArchUnit.Infrastructure.TestFrameworks;
+namespace ConventionAsserts.Infrastructure.TestFrameworks;
 
 internal class UnknownTestFramework : ITestFramework
 {
