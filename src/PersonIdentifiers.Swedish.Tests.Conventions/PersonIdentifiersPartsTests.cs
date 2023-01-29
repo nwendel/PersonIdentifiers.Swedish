@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ConventionAsserts;
+using ConventionAssertions;
 using PersonIdentifiers.Swedish.Parts;
 using Xunit;
 

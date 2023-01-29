@@ -1,5 +1,5 @@
-﻿using ConventionAsserts;
-using ConventionAsserts.Rules;
+﻿using ConventionAssertions;
+using ConventionAssertions.Rules;
 using Xunit;
 
 namespace PersonIdentifiers.Swedish.Tests.Conventions;
