@@ -1,5 +1,1 @@
-# PersonIdentifiers.Swedish
-
-[![Build Status](https://dev.azure.com/nwendel/PersonalIdentifiers.Swedish/_apis/build/status/PersonIdentifiers.Swedish?branchName=main)](https://dev.azure.com/nwendel/PersonalIdentifiers.Swedish/_build/latest?definitionId=1&branchName=main)
-
-[![Azure DevOps coverage](https://img.shields.io/azure-devops/coverage/nwendel/PersonalIdentifiers.Swedish/1/main)](https://dev.azure.com/nwendel/PersonalIdentifiers.Swedish/_build/latest?definitionId=1&branchName=main&view=codecoverage-tab)
+# PersonIdentifiers.Swedish ![Build](https://github.com/nwendel/personidentifiers.swedish/actions/workflows/build.yml/badge.svg) [![Coverage](https://codecov.io/gh/nwendel/personidentifiers.swedish/branch/main/graph/badge.svg?token=BMNOSIWUMV)](https://codecov.io/gh/nwendel/personidentifiers.swedish)
